@@ -53,7 +53,7 @@
             replaceAttrValue = container.attr("data-valmsg-replace"),
             replace = replaceAttrValue ? $.parseJSON(replaceAttrValue) !== false : null;
 
-        container.removeClass("field-validation-valid").addClass("field-validation-error");
+        container.removeClass("field-validation-valid").addClass("field-validation-error").addClass("ui error visible message");
         error.data("unobtrusiveContainer", container);
 
         if (replace) {
@@ -71,7 +71,7 @@
 
         if (list && list.length && validator.errorList.length) {
             list.empty();
-            container.addClass("validation-summary-errors").removeClass("validation-summary-valid");
+            container.addClass("validation-summary-errors").addClass("ui error visible message").removeClass("validation-summary-valid");
 
             $.each(validator.errorList, function () {
                 $("<li />").html(this.message).appendTo(list);
@@ -86,7 +86,7 @@
             var replaceAttrValue = container.attr("data-valmsg-replace"),
                 replace = replaceAttrValue ? $.parseJSON(replaceAttrValue) : null;
 
-            container.addClass("field-validation-valid").removeClass("field-validation-error");
+            container.addClass("field-validation-valid").removeClass("field-validation-error").removeClass("ui error visible message");
             error.removeData("unobtrusiveContainer");
 
             if (replace) {
@@ -114,7 +114,7 @@
             .removeClass("validation-summary-errors");
         $form.find(".field-validation-error")
             .addClass("field-validation-valid")
-            .removeClass("field-validation-error")
+            .removeClass("ui error visible message field-validdation-error")
             .removeData("unobtrusiveContainer")
             .find(">*")  // If we were using valmsg-replace, get the underlying error
                 .removeData("unobtrusiveContainer");

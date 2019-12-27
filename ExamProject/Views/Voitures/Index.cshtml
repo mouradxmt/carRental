@@ -9,65 +9,97 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @*@Html.DisplayNameFor(model => model.ImagePath)*@
-                Image
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Marque)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Model)
-            </th>
-            <th>
-                @*@Html.DisplayNameFor(model => model.PrixParJour)*@
-                Prix Par Jour (Dh)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Annee)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Kilometrage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Couleur)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                <img src="@Html.DisplayFor(modelItem => item.ImagePath)" width="150px" height="100px" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Marque.NomMarque)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Model.NomModel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrixParJour)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Annee)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Kilometrage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Couleur)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+@foreach (var item in Model)
+{
+    <div class="ui card left floated" style="margin:1em;">
+        <div class="image dimmable">
+            <div class="ui dimmer transition hidden" style="display: none;">
+                <div class="content">
+                    <div class="center">
+                        <a asp-action="Details" asp-route-id="@item.Id" class="ui inverted button">Details</a>
+                    </div>
+                </div>
+            </div>
+            <img  src="@Html.DisplayFor(modelItem => item.ImagePath)" height="290px" style="max-height:290px"/>
+        </div>
+        <div class="content">
+            <div class="header">@Html.DisplayFor(modelItem => item.Marque.NomMarque) @Html.DisplayFor(modelItem => item.Model.NomModel)</div>
+            <div class="meta">
+                <a class="group"> @Html.DisplayFor(modelItem => item.PrixParJour)</a>
+            </div>
+            <div class="description">
+                <span class="ui sub header">Prix par jour: </span><a class="ui tag label">@Html.DisplayFor(modelItem => item.PrixParJour) MAD</a>
+            </div>
+        </div>
+        <div class="extra content">
+
+            <a class="friends">
+                Arbitrary
+            </a>
+            <span class="right floated created"><a class="ui tag label ui teal">@Html.DisplayFor(modelItem => item.PrixParJour) MAD</a></span>
+        </div>
+    </div>
 }
-    </tbody>
-</table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.ImagePath)*@
+                    Image
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Marque)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Model)
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.PrixParJour)*@
+                    Prix Par Jour (Dh)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Annee)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Kilometrage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Couleur)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="@Html.DisplayFor(modelItem => item.ImagePath)" width="150px" height="100px" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Marque.NomMarque)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Model.NomModel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrixParJour)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Annee)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Kilometrage)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Couleur)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

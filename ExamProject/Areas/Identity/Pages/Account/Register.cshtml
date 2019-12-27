@@ -5,57 +5,105 @@
     ViewData["Title"] = "Register";
 }
 
-<h2>@ViewData["Title"]</h2>
+<style type="text/css">
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
-            <hr />
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Input.Nom"></label>
-                <input asp-for="Input.Nom" class="form-control" />
-                <span asp-validation-for="Input.Nom" class="text-danger"></span>
+    body {
+        background-color: #DADADA;
+    }
+
+        body > .grid {
+            height: 100%;
+        }
+
+    .image {
+        margin-top: -100px;
+    }
+
+    .column {
+        max-width: 450px;
+    }
+</style>
+
+<div class="ui middle aligned center aligned grid">
+    <div class="column">
+        <h2 class="ui teal image header">
+            <span class="content">
+                Creer votre compte
+            </span>
+        </h2>
+        <form method="post" class="ui large form">
+            <div class="ui stacked segment">
+
+                <div asp-validation-summary="All"></div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input asp-for="Input.Nom" class="form-control" placeholder="Username/Nom" />
+                    </div>
+                    <span asp-validation-for="Input.Nom"></span>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input asp-for="Input.Prenom" class="form-control" placeholder="Prenom" />
+                    </div>
+                    <span asp-validation-for="Input.Prenom"></span>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="phone icon"></i>
+                        <input asp-for="Input.Tele" class="form-control" placeholder="Numero de telephone" />
+                    </div>
+                    <span asp-validation-for="Input.Tele"></span>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="address book outline icon"></i>
+                        <input asp-for="Input.Ville" class="form-control" placeholder="Ville" />
+                    </div>
+                    <span asp-validation-for="Input.Ville"></span>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="envelope icon"></i>
+                        <input asp-for="Input.Email" class="form-control" placeholder="Adresse e-mail" />
+                    </div>
+                    <span asp-validation-for="Input.Email"></span>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input asp-for="Input.Password" class="form-control" placeholder="Mot de passe" />
+                    </div>
+                    <span asp-validation-for="Input.Password"></span>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="Confirmer mot de passe" />
+                    </div>
+                    <span asp-validation-for="Input.ConfirmPassword"></span>
+                </div>
+                <button type="submit" class="btn btn-default ui fluid large teal submit button">Creer un compte</button>
+
             </div>
-            <div class="form-group">
-                <label asp-for="Input.Prenom"></label>
-                <input asp-for="Input.Prenom" class="form-control" />
-                <span asp-validation-for="Input.Prenom" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Tele"></label>
-                <input asp-for="Input.Tele" class="form-control" />
-                <span asp-validation-for="Input.Tele" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Ville"></label>
-                <input asp-for="Input.Ville" class="form-control" />
-                <span asp-validation-for="Input.Ville" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.ConfirmPassword"></label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-            @if (User.IsInRole(Roles.Admin)) { 
-                <div class="form-group">
-                    <label asp-for="Input.IsAdmin"></label>
-                    <input asp-for="Input.IsAdmin" class="form-control" />
-                </div>}
-            <button type="submit" class="btn btn-default">Register</button>
+
+            <div class="ui error message"></div>
+
         </form>
+
+
+        @if (User.IsInRole(Roles.Admin))
+        {
+    <div class="ui message">
+        <div class="form-group">
+            <label asp-for="Input.IsAdmin"></label>
+            <input asp-for="Input.IsAdmin" class="form-control" />
+        </div>
     </div>
+    }
+            
+        </div>
 </div>
 
 @section Scripts {
