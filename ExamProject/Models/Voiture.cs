@@ -10,14 +10,14 @@ namespace ExamProject.Models
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Provide Price")]
-        public double PrixParJour { get; set; }
+        public string PrixParJour { get; set; }
 
         [Required(ErrorMessage = "Provide Year")]
-        public int Annee { get; set; }
+        public string Annee { get; set; }
 
         [Required(ErrorMessage = "Provide Mileage")]
         [Range(1, int.MaxValue, ErrorMessage = "This Mileage is Invalid")]
-        public int Kilometrage { get; set; }
+        public string Kilometrage { get; set; }
 
         public Marque Marque { get; set; }
 
@@ -29,7 +29,7 @@ namespace ExamProject.Models
         [Range(1, int.MaxValue, ErrorMessage = "Select a Model")]
         public int ModelID { get; set; }
 
-        public Proprietaire Proprietaire { get; set; }
+        public int ProprietaireId { get; set; }
         public string Couleur { get; set; }
 
         public string Immatriculation { get; set; }

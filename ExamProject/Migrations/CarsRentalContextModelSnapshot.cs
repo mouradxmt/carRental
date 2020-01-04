@@ -84,6 +84,42 @@ namespace ExamProject.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("ExamProject.Models.Locataire", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("locataires");
+                });
+
+            modelBuilder.Entity("ExamProject.Models.Location", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateDebut");
+
+                    b.Property<DateTime>("DateFin");
+
+                    b.Property<int?>("LocataireId");
+
+                    b.Property<double>("PrixTotal");
+
+                    b.Property<int?>("VoitureId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LocataireId");
+
+                    b.HasIndex("VoitureId");
+
+                    b.ToTable("Location");
+                });
+
             modelBuilder.Entity("ExamProject.Models.Marque", b =>
                 {
                     b.Property<int>("Id")
@@ -128,7 +164,7 @@ namespace ExamProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Proprietaire");
+                    b.ToTable("proprietaires");
                 });
 
             modelBuilder.Entity("ExamProject.Models.Voiture", b =>
@@ -137,7 +173,8 @@ namespace ExamProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Annee");
+                    b.Property<string>("Annee")
+                        .IsRequired();
 
                     b.Property<string>("Couleur");
 
@@ -147,7 +184,8 @@ namespace ExamProject.Migrations
 
                     b.Property<string>("Immatriculation");
 
-                    b.Property<int>("Kilometrage");
+                    b.Property<string>("Kilometrage")
+                        .IsRequired();
 
                     b.Property<int>("MarqueID");
 
@@ -155,7 +193,7 @@ namespace ExamProject.Migrations
 
                     b.Property<double>("PrixParJour");
 
-                    b.Property<int?>("ProprietaireId");
+                    b.Property<int>("ProprietaireId");
 
                     b.HasKey("Id");
 
@@ -278,6 +316,17 @@ namespace ExamProject.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ExamProject.Models.Location", b =>
+                {
+                    b.HasOne("ExamProject.Models.Locataire", "Locataire")
+                        .WithMany("Locations")
+                        .HasForeignKey("LocataireId");
+
+                    b.HasOne("ExamProject.Models.Voiture", "Voiture")
+                        .WithMany()
+                        .HasForeignKey("VoitureId");
+                });
+
             modelBuilder.Entity("ExamProject.Models.Model", b =>
                 {
                     b.HasOne("ExamProject.Models.Marque", "Marque")
@@ -298,9 +347,10 @@ namespace ExamProject.Migrations
                         .HasForeignKey("ModelID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("ExamProject.Models.Proprietaire", "Proprietaire")
+                    b.HasOne("ExamProject.Models.Proprietaire")
                         .WithMany("Voitures")
-                        .HasForeignKey("ProprietaireId");
+                        .HasForeignKey("ProprietaireId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

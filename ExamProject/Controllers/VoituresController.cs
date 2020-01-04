@@ -41,11 +41,12 @@ namespace ExamProject.Controllers
         // GET: Voitures
         public IActionResult Index()
         {
-            var voitures = _context.Voiture.Include(m => m.Marque).Include(m => m.Model);
+            var currentUser = _context.applicationUsers.Where(a => a.UserName == User.Identity.Name).First();
+            var voitures = _context.Voiture.Include(m => m.Marque).Include(m => m.Model).Where(v => v.ProprietaireId == currentUser.ProprietaireId); ;
             return View(voitures);
         }
 
-        // GET: Voitures/Details/5
+        
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -98,6 +99,8 @@ namespace ExamProject.Controllers
             {
                 return View(VM);
             }
+            var currentUser = _context.applicationUsers.Where(a => a.UserName == User.Identity.Name).First();
+            VM.Voiture.ProprietaireId =  currentUser.ProprietaireId ;
             _context.Voiture.Add(VM.Voiture);
             UploadImage();
             _context.SaveChanges();
