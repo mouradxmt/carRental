@@ -52,7 +52,8 @@
     <partial name="_CookieConsentPartial" />
 
     <div class="container body-content">
-        
+        @if (User.IsInRole(Roles.Admin) || User.IsInRole(Roles.Executive))
+        {
         <div class="ui breadcrumb">
             <a class="section" asp-controller="Home" asp-action="Index"><i class="ui icon home"></i>Car Rental</a>
             <i class="right chevron icon divider"></i>
@@ -60,7 +61,7 @@
             <i class="right chevron icon divider"></i>
             <div class="active section">@this.ViewContext.RouteData.Values["action"].ToString()</div>
         </div>
-
+        }
         @RenderBody()
 
     </div>
