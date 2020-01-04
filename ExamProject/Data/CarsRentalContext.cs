@@ -19,5 +19,7 @@ namespace ExamProject.Models
         public DbSet<ApplicationUser> applicationUsers { get; set; }
         public DbSet<Marque> Marques { get; set; }
         public DbSet<Model> Models { get; set; }
+        public DbSet<Proprietaire> proprietaires { get; set; }
+        public DbSet<Locataire> locataires { get; set; }
     }
 }

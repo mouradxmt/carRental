@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using ExamProject.Helpers;
+using System.Linq;
 
 namespace ExamProject.Areas.Identity.Pages.Account
 {
@@ -18,6 +19,7 @@ namespace ExamProject.Areas.Identity.Pages.Account
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly CarsRentalContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
@@ -28,8 +30,10 @@ namespace ExamProject.Areas.Identity.Pages.Account
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            CarsRentalContext context)
         {
+            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
@@ -82,7 +86,19 @@ namespace ExamProject.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Nom, Email = Input.Email, PhoneNumber = Input.Tele, Nom = Input.Nom, Prenom = Input.Prenom, Ville = Input.Ville };
+                // creating an owner 
+                var proprietaire = new Proprietaire() { IsAgence = false };
+                var locataire = new Locataire() { };
+                _context.locataires.Add(locataire);
+                _context.proprietaires.Add(proprietaire);
+                _context.SaveChanges();
+                var proprietaireID = _context.proprietaires.Max(p => p.Id);
+                var LocatairID = _context.locataires.Max(l => l.Id);
+
+                var user = new ApplicationUser { UserName = Input.Nom, Email = Input.Email, PhoneNumber = Input.Tele, Nom = Input.Nom,
+                    Prenom = Input.Prenom, Ville = Input.Ville,ProprietaireId=proprietaireID ,LocataireId=LocatairID };
+               
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

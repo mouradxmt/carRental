@@ -4,14 +4,16 @@ using ExamProject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ExamProject.Migrations
 {
     [DbContext(typeof(CarsRentalContext))]
-    partial class CarsRentalContextModelSnapshot : ModelSnapshot
+    [Migration("20200104175642_changingApplicationUser")]
+    partial class changingApplicationUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

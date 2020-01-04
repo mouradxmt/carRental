@@ -9,8 +9,10 @@ namespace ExamProject.Models
 {
     public class ApplicationUser :IdentityUser
     {
-        public Proprietaire Proprietaire { get; set; }
-        public Locataire Locataire { get; set; }
+        [ForeignKey("Proprietaire")]
+        public int ProprietaireId { get; set; }
+        [ForeignKey("Locataire")]
+        public int LocataireId { get; set; }
         public string Tele { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
