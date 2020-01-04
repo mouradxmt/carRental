@@ -7,40 +7,40 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="ui green button"><i class="ui icon add"></i>Create New</a>
 </p>
 @foreach (var item in Model)
 {
-    <div class="ui card left floated" style="margin:1em;">
-        <div class="image dimmable">
-            <div class="ui dimmer transition hidden" style="display: none;">
-                <div class="content">
-                    <div class="center">
-                        <a asp-action="Details" asp-route-id="@item.Id" class="ui inverted button">Details</a>
-                    </div>
-                </div>
-            </div>
-            <img  src="@Html.DisplayFor(modelItem => item.ImagePath)" height="290px" style="max-height:290px"/>
+    <div class="ui card left floated" style="width:350px;float:left;margin:1em;">
+        <div class="image left floated">
+            <img src="@Html.DisplayFor(modelItem => item.ImagePath)" style="height:290px"/>
         </div>
         <div class="content">
             <div class="header">@Html.DisplayFor(modelItem => item.Marque.NomMarque) @Html.DisplayFor(modelItem => item.Model.NomModel)</div>
             <div class="meta">
-                <a class="group"> @Html.DisplayFor(modelItem => item.PrixParJour)</a>
+                <a class="group"> @Html.DisplayFor(modelItem => item.PrixParJour) MAD / Jour</a>
             </div>
-            <div class="description">
-                <span class="ui sub header">Prix par jour: </span><a class="ui tag label">@Html.DisplayFor(modelItem => item.PrixParJour) MAD</a>
+            <div class="description ui grid">
+                <div class="ui six wide column"><span class="ui sub header">Prix par jour: </span></div><div class="ui ten wide column"><span class="ui tag label ui green">@Html.DisplayFor(modelItem => item.PrixParJour) MAD</span></div>
+                <div class="ui six wide column"><span class="ui sub header">Marque:</span> </div> <div class="ui ten wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.Marque.NomMarque)</span></div>
+                <div class="ui six wide column"><span class="ui sub header">Modèle:</span> </div><div class="ui ten wide column"><span class="ui label"> @Html.DisplayFor(modelItem => item.Model.NomModel)</span></div>
+                <div class="ui six wide column"><span class="ui sub header">Année:</span></div> <span class="ui ten wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.Annee)</span></span>
+                <div class="ui six wide column"><span class="ui sub header">Couleur: </span></div><div class="ui ten wide column"> <span class="ui label">@Html.DisplayFor(modelItem => item.Couleur)</span></div>
+                <div class="ui six wide column"><span class="ui sub header">Kilométrage: </span></div><div class="ui ten wide column"> <span class="ui label">@Html.DisplayFor(modelItem => item.Kilometrage)</span></div>
+
             </div>
         </div>
         <div class="extra content">
 
-            <a class="friends">
-                Arbitrary
-            </a>
-            <span class="right floated created"><a class="ui tag label ui teal">@Html.DisplayFor(modelItem => item.PrixParJour) MAD</a></span>
+            <span class="ui center">
+                <a asp-action="Edit" asp-route-id="@item.Id" class="ui tiny labeled icon button blue"><i class=" ui icon edit"></i>Edit</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="ui tiny labeled icon button red"><i class=" ui icon trash"></i>Delete</a>
+                <a asp-action="Details" asp-route-id="@item.Id" class="ui tiny teal labeled icon button"><i class=" ui icon info"></i>Details</a>
+            </span>
         </div>
     </div>
 }
-    <table class="table">
+ <table class="table">
         <thead>
             <tr>
                 <th>
