@@ -1,0 +1,72 @@
+﻿@model ExamProject.Models.Voiture
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Voiture</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PrixParJour)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrixParJour)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Annee)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Annee)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Kilometrage)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Kilometrage)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Marque)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Marque.NomMarque)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Model.NomModel)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Couleur)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Couleur)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Immatriculation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Immatriculation)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ImagePath)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ImagePath)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

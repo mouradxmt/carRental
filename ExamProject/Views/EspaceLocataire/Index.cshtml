@@ -1,0 +1,64 @@
+﻿@model ExamProject.Models.viewModel.EspaceLocataireVM
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _localizer
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<p>
+    <a asp-action="Create" class="ui green button"><i class="ui icon add"></i>@_localizer["Create New"]</a>
+</p>
+
+<form method="post" enctype="multipart/form-data" asp-action="Index">
+    <div class="ui fluid icon input center">
+        <input type="text" asp-for="searchedCar" name="keyword" value="@ViewBag.keyword" placeholder="Search a very wide input...">
+        <i class="search icon"></i>
+    </div>
+</form>
+
+    <div class="ui items">
+        @foreach (var item in Model.voitures)
+        {
+            <div class="ui item" style="background:white;border:1px solid #ccc;margin:1.5em;">
+                <div class="image">
+                    <img src="@Html.DisplayFor(modelItem => item.ImagePath)" />
+                </div>
+                <div class="content">
+
+                    <div class="header padded">@Html.DisplayFor(modelItem => item.Marque.NomMarque) @Html.DisplayFor(modelItem => item.Model.NomModel)</div>
+                    <span class="meta ui green text"> @Html.DisplayFor(modelItem => item.PrixParJour) MAD / Jour</span>
+
+                    <div class="ui grid description">
+                        <div class="ui four wide column"><span class="ui sub header">@_localizer["Price Per Day"]: </span></div>
+                        <div class="ui twelve wide column"><span class="ui tag label ui green">@Html.DisplayFor(modelItem => item.PrixParJour) MAD</span></div>
+
+                        <div class="ui four wide column"><span class="ui sub header">@_localizer["Make"]:</span> </div>
+                        <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.Marque.NomMarque)</span></div>
+
+                        <div class="ui four wide column"><span class="ui sub header">@_localizer["Model"]:</span> </div>
+                        <div class="ui twelve wide column"><span class="ui label"> @Html.DisplayFor(modelItem => item.Model.NomModel)</span></div>
+
+                        <div class="ui four wide column"><span class="ui sub header">@_localizer["Year"]:</span></div>
+                        <span class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.Annee)</span></span>
+
+                        <div class="ui four wide column"><span class="ui sub header">@_localizer["Color"]: </span></div>
+                        <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.Couleur)</span></div>
+
+                        <div class="ui four wide column"><span class="ui sub header">@_localizer["Mileage"]: </span></div>
+                        <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.Kilometrage)</span></div>
+
+                    </div>
+
+                    <span class="ui center aligned extra">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="ui tiny labeled icon button blue"><i class=" ui icon edit"></i>@_localizer["Edit"]</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="ui tiny labeled icon button red"><i class=" ui icon trash"></i>@_localizer["Delete"]</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="ui tiny teal labeled icon button"><i class=" ui icon info"></i>@_localizer["Details"]</a>
+                    </span>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="clear"></div>
+
