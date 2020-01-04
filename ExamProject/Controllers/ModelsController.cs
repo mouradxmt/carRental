@@ -10,18 +10,23 @@ using ExamProject.Models.viewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using ExamProject.Helpers;
+using Microsoft.Extensions.Localization;
+using Microsoft.AspNetCore.Localization;
+
 namespace ExamProject.Controllers
 {
     [Authorize(Roles = Roles.Admin + "," + Roles.Executive)]
     public class ModelsController : Controller
     {
+        private readonly IStringLocalizer<ModelsController> _localizer;
+
         private readonly CarsRentalContext _context;
         [BindProperty]
         public ModelVM VM { get; set; }
-
-        public ModelsController(CarsRentalContext context)
+        public ModelsController(CarsRentalContext context, IStringLocalizer<ModelsController> localizer)
         {
             _context = context;
+            _localizer = localizer;
             VM = new ModelVM()
             {
                 Marques = _context.Marques.ToList(),
@@ -56,7 +61,7 @@ namespace ExamProject.Controllers
         public List<Marque> FillSelectList()
         {
             var makes = _context.Marques.ToList();
-            makes.Insert(0, new Marque { Id = -1, NomMarque = "--- Please select a Make--" });
+            makes.Insert(0, new Marque { Id = -1, NomMarque = _localizer["--- Please select a Make--"] });
             return makes;
         }
         ModelVM GetAllMakes()
@@ -179,6 +184,17 @@ namespace ExamProject.Controllers
         {
             return _context.Models.ToList()
             .Where(m => m.MarqueID == MarqueID);
+        }
+        [HttpPost]
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddDays(1) }
+            );
+
+            return LocalRedirect(returnUrl);
         }
     }
 }

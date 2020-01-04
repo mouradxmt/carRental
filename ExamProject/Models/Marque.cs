@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ExamProject.Models
 {
@@ -6,6 +7,8 @@ namespace ExamProject.Models
     {
 
         public int Id { get; set; }
+        [Required(ErrorMessage = "Provide Make")]
+        [MaxLength(30)]
         public string NomMarque { get; set; }
     }
 }

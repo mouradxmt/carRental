@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ExamProject.Models;
 using ExamProject.Helpers;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Localization;
 
 namespace ExamProject.Controllers
 {
@@ -20,6 +21,12 @@ namespace ExamProject.Controllers
         {
             _context = context;
         }
+        //private readonly IStringLocalizer<MarquesController> _localizer;
+
+        //public MarquesController(IStringLocalizer<MarquesController> localizer)
+        //{
+        //    _localizer = localizer;
+        //}
 
         // GET: Marques
         public async Task<IActionResult> Index()

@@ -12,6 +12,9 @@ using ExamProject.Models.viewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using ExamProject.Helpers;
+using Microsoft.Extensions.Localization;
+using Microsoft.AspNetCore.Localization;
+
 namespace ExamProject.Controllers
 {
     [Authorize(Roles = Roles.Admin + "," + Roles.Executive)]
@@ -21,11 +24,12 @@ namespace ExamProject.Controllers
         private readonly HostingEnvironment _hostingEnvironment;
         [BindProperty]
         public CarViewModel VM { get; set; }
-
-        public VoituresController(CarsRentalContext context ,HostingEnvironment hostingEnvironment)
+        private readonly IStringLocalizer<VoituresController> _localizer;
+        public VoituresController(CarsRentalContext context ,HostingEnvironment hostingEnvironment, IStringLocalizer<VoituresController> localizer)
         {
             _context = context;
             _hostingEnvironment = hostingEnvironment;
+            _localizer = localizer;
         }
 
         // GET: Voitures
@@ -205,6 +209,17 @@ namespace ExamProject.Controllers
                SavedCar.ImagePath = RelativeImagePath;
 
             }
+        }
+        [HttpPost]
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddDays(1) }
+            );
+
+            return LocalRedirect(returnUrl);
         }
 
     }

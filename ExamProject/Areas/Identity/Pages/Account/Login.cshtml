@@ -1,6 +1,8 @@
 ﻿@page
 @model LoginModel
 @using ExamProject.Helpers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _localizer
 @{
     ViewData["Title"] = "Log in";
 }
@@ -33,7 +35,7 @@
         <form method="post" class="ui large form">
             <div class="ui stacked segment">
 
-                <div asp-validation-summary="All" ></div>
+                <div asp-validation-summary="All"></div>
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="user icon"></i>
@@ -54,9 +56,9 @@
 
 
 
-                </div> 
+                </div>
                 <button type="submit" class="btn btn-default ui fluid large red submit button">Log in</button>
-                
+
             </div>
 
             <div class="ui error message"></div>

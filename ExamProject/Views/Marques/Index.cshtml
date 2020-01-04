@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<ExamProject.Models.Marque>
-
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _localizer
 @{
     ViewData["Title"] = "Index";
 }
@@ -7,7 +8,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">@_localizer["Create New"]</a>
 </p>
 <table class="table">
     <thead>
@@ -19,17 +20,18 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomMarque)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomMarque)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">@_localizer["Edit"]</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">@_localizer["Details"]</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">@_localizer["Delete"]</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
