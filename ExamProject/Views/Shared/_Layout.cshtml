@@ -52,22 +52,32 @@
     <partial name="_CookieConsentPartial" />
 
     <div class="container body-content">
+        
+        <div class="ui breadcrumb">
+            <a class="section" asp-controller="Home" asp-action="Index"><i class="ui icon home"></i>Car Rental</a>
+            <i class="right chevron icon divider"></i>
+            <a asp-area="" asp-controller="@this.ViewContext.RouteData.Values["controller"].ToString()" asp-action="Index" class="section">@this.ViewContext.RouteData.Values["controller"].ToString()</a>
+            <i class="right chevron icon divider"></i>
+            <div class="active section">@this.ViewContext.RouteData.Values["action"].ToString()</div>
+        </div>
+
         @RenderBody()
-        <hr />
-        <footer>
-            @{
-                string year = DateTime.Now.Year.ToString();
-            }
-            <div class="row">
-                <div class="col-sm-6">
-                    <p>&copy; @year - ExamProject</p>
-                </div>
-                <div class="col-sm-6 text-right">
-                    @await Html.PartialAsync("_SelectLanguagePartial")
-                </div>
-            </div>
-        </footer>
+
     </div>
+    <hr style="border-top:1px solid #ccc;"/>
+    <footer>
+        @{
+            string year = DateTime.Now.Year.ToString();
+        }
+        <div class="ui grid center aligned">
+            <div class="ui column six wide">
+                <p>&copy; @year - ExamProject</p>
+            </div>
+            <div class="ui column six wide">
+                @await Html.PartialAsync("_SelectLanguagePartial")
+            </div>
+        </div>
+    </footer>
     <script src="~/lib/semantic-ui/components/dimmer.js"></script>
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

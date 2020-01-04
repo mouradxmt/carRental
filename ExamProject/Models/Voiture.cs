@@ -10,11 +10,9 @@ namespace ExamProject.Models
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Provide Price")]
-        [MaxLength(30)]
         public double PrixParJour { get; set; }
 
         [Required(ErrorMessage = "Provide Year")]
-        [MaxLength(30)]
         public int Annee { get; set; }
 
         [Required(ErrorMessage = "Provide Mileage")]

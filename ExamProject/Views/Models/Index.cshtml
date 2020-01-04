@@ -33,9 +33,9 @@
                     @Html.DisplayFor(modelItem => item.Marque.NomMarque)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">@_localizer["Edit"]</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">@_localizer["Details"]</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">@_localizer["Delete"]</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="ui tiny labeled icon button blue"><i class=" ui icon edit"></i>@_localizer["Edit"]</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="ui tiny labeled icon button red"><i class=" ui icon trash"></i>@_localizer["Delete"]</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="ui tiny teal labeled icon button"><i class=" ui icon info"></i>@_localizer["Details"]</a>
                 </td>
             </tr>
         }

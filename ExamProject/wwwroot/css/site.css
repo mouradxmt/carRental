@@ -39,3 +39,20 @@ body {
 .margin{
     margin:5px;
 }
+.ui.grid > .column:not(.row) {
+    padding-top: 0;
+}
+.ui.items > .item > .image > img {
+    display: block;
+    width: 100%;
+    border-radius: 0.125rem;
+    border: none;
+    height: 340px;
+}
+.ui.items > .item > .image:not(.ui) {
+    width: 500px;
+}
+.ui.items > .item > .content > .header:not(.ui) {
+    margin-top: 1.2em;
+    padding: 0.5em;
+}

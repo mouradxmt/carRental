@@ -6,40 +6,52 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Cars listing</h1>
 
 <p>
     <a asp-action="Create" class="ui green button"><i class="ui icon add"></i>@_localizer["Create New"]</a>
 </p>
-@foreach (var item in Model)
-{
-    <div class="ui card left floated" style="width:350px;float:left;margin:1em;">
-        <div class="image left floated">
-            <img src="@Html.DisplayFor(modelItem => item.ImagePath)" style="height:290px" />
-        </div>
-        <div class="content">
-            <div class="header">@Html.DisplayFor(modelItem => item.Marque.NomMarque) @Html.DisplayFor(modelItem => item.Model.NomModel)</div>
-            <div class="meta">
-                <a class="group"> @Html.DisplayFor(modelItem => item.PrixParJour) MAD / Jour</a>
+<div class="ui items">
+    @foreach (var item in Model)
+    {
+        <div class="ui item" style="background:white;border:1px solid #ccc;margin:1.5em;">
+            <div class="image">
+                <img src="@Html.DisplayFor(modelItem => item.ImagePath)" />
             </div>
-            <div class="description ui grid">
-                <div class="ui six wide column"><span class="ui sub header">@_localizer["Price Per Day"]: </span></div><div class="ui ten wide column"><span class="ui tag label ui green">@Html.DisplayFor(modelItem => item.PrixParJour) MAD</span></div>
-                <div class="ui six wide column"><span class="ui sub header">@_localizer["Make"]:</span> </div> <div class="ui ten wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.Marque.NomMarque)</span></div>
-                <div class="ui six wide column"><span class="ui sub header">@_localizer["Model"]:</span> </div><div class="ui ten wide column"><span class="ui label"> @Html.DisplayFor(modelItem => item.Model.NomModel)</span></div>
-                <div class="ui six wide column"><span class="ui sub header">@_localizer["Year"]:</span></div> <span class="ui ten wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.Annee)</span></span>
-                <div class="ui six wide column"><span class="ui sub header">@_localizer["Color"]: </span></div><div class="ui ten wide column"> <span class="ui label">@Html.DisplayFor(modelItem => item.Couleur)</span></div>
-                <div class="ui six wide column"><span class="ui sub header">@_localizer["Mileage"]: </span></div><div class="ui ten wide column"> <span class="ui label">@Html.DisplayFor(modelItem => item.Kilometrage)</span></div>
+            <div class="content">
+               
+                    <div class="header padded">@Html.DisplayFor(modelItem => item.Marque.NomMarque) @Html.DisplayFor(modelItem => item.Model.NomModel)</div>
+                    <span class="meta ui green text"> @Html.DisplayFor(modelItem => item.PrixParJour) MAD / Jour</span>
+               
+                <div class="ui grid description">
+                    <div class="ui four wide column"><span class="ui sub header">@_localizer["Price Per Day"]: </span></div>
+                    <div class="ui twelve wide column"><span class="ui tag label ui green">@Html.DisplayFor(modelItem => item.PrixParJour) MAD</span></div>
 
+                    <div class="ui four wide column"><span class="ui sub header">@_localizer["Make"]:</span> </div> 
+                    <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.Marque.NomMarque)</span></div>
+
+                    <div class="ui four wide column"><span class="ui sub header">@_localizer["Model"]:</span> </div>
+                    <div class="ui twelve wide column"><span class="ui label"> @Html.DisplayFor(modelItem => item.Model.NomModel)</span></div>
+
+                    <div class="ui four wide column"><span class="ui sub header">@_localizer["Year"]:</span></div> 
+                    <span class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.Annee)</span></span>
+
+                    <div class="ui four wide column"><span class="ui sub header">@_localizer["Color"]: </span></div>
+                    <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.Couleur)</span></div>
+
+                    <div class="ui four wide column"><span class="ui sub header">@_localizer["Mileage"]: </span></div>
+                    <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.Kilometrage)</span></div>
+
+                </div>
+           
+                <span class="ui center aligned extra">
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="ui tiny labeled icon button blue"><i class=" ui icon edit"></i>@_localizer["Edit"]</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="ui tiny labeled icon button red"><i class=" ui icon trash"></i>@_localizer["Delete"]</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="ui tiny teal labeled icon button"><i class=" ui icon info"></i>@_localizer["Details"]</a>
+                </span>
             </div>
         </div>
-        <div class="extra content">
-
-            <span class="ui center">
-                <a asp-action="Edit" asp-route-id="@item.Id" class="ui tiny labeled icon button blue"><i class=" ui icon edit"></i>@_localizer["Edit"]</a>
-                <a asp-action="Delete" asp-route-id="@item.Id" class="ui tiny labeled icon button red"><i class=" ui icon trash"></i>@_localizer["Delete"]</a>
-                <a asp-action="Details" asp-route-id="@item.Id" class="ui tiny teal labeled icon button"><i class=" ui icon info"></i>@_localizer["Details"]</a>
-            </span>
-        </div>
-    </div>
-}
+    }
+</div>
+<div class="clear"></div>
 

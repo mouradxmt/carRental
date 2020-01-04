@@ -61,26 +61,21 @@ namespace ExamProject.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NomMarque")] Marque marque)
+        public IActionResult Create(Marque marque)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(marque);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             return View(marque);
         }
 
         // GET: Marques/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var marque = await _context.Marques.FindAsync(id);
+            var marque =_context.Marques.Find(id);
             if (marque == null)
             {
                 return NotFound();
@@ -92,33 +87,13 @@ namespace ExamProject.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NomMarque")] Marque marque)
+        public IActionResult Edit(Marque marque)
         {
-            if (id != marque.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(marque);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!MarqueExists(marque.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+               _context.Update(marque);
+               _context.SaveChanges();
+                return RedirectToAction(nameof(Index));  
             }
             return View(marque);
         }
@@ -144,19 +119,12 @@ namespace ExamProject.Controllers
         // POST: Marques/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var marque = await _context.Marques.FindAsync(id);
+            Marque marque = _context.Marques.Find(id);
             _context.Marques.Remove(marque);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool MarqueExists(int id)
-        {
-            return _context.Marques.Any(e => e.Id == id);
-        }
-
-        
+        }        
     }
 }

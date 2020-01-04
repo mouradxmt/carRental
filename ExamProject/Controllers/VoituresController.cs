@@ -29,6 +29,12 @@ namespace ExamProject.Controllers
         {
             _context = context;
             _hostingEnvironment = hostingEnvironment;
+            VM = new CarViewModel()
+            {
+                Marques = _context.Marques.ToList(),
+                Models = _context.Models.ToList(),
+                Voiture = new Models.Voiture(),
+            };
             _localizer = localizer;
         }
 
@@ -99,52 +105,36 @@ namespace ExamProject.Controllers
         }
 
         // GET: Voitures/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        [HttpGet]
+        public IActionResult Edit(int id)
         {
-            if (id == null)
+            VM.Voiture = _context.Voiture.SingleOrDefault(b => b.Id == id);
+            VM.Models = _context.Models.Where(m => m.MarqueID == VM.Voiture.MarqueID);
+            if (VM.Voiture == null)
             {
                 return NotFound();
             }
-
-            var voiture = await _context.Voiture.FindAsync(id);
-            if (voiture == null)
-            {
-                return NotFound();
-            }
-            return View(voiture);
+            return View(VM);
         }
 
-        
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,PrixParJour,Annee,Kilometrage,Couleur,ImagePath")] Voiture voiture)
+        public IActionResult Edit()
         {
-            if (id != voiture.Id)
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                VM.Marques = _context.Marques.ToList();
+                VM.Models = _context.Models.ToList();
+                return View(VM);
             }
-
-            if (ModelState.IsValid)
+            if (VM.Voiture.ModelID == 0)
             {
-                try
-                {
-                    _context.Update(voiture);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!VoitureExists(voiture.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                ViewBag.Message = "Please select a Model from the list";
+                return View(VM);
             }
-            return View(voiture);
+            _context.Voiture.Update(VM.Voiture);
+            UploadImage();
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Voitures/Delete/5
@@ -168,11 +158,11 @@ namespace ExamProject.Controllers
         // POST: Voitures/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var voiture = await _context.Voiture.FindAsync(id);
+             Voiture voiture = _context.Voiture.Find(id);
             _context.Voiture.Remove(voiture);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
