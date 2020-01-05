@@ -28,7 +28,20 @@ namespace ExamProject.Controllers
             {
                 var appuser = _context.applicationUsers.Where(ap => ap.ProprietaireId == ele.ProprietaireId).First();
                 ele.ApplicationUser = appuser;
+
+                if (!ele.EstDisponible)
+                {
+                    var location = _context.locations.Where(l => l.VoitureId == ele.Id).FirstOrDefault();
+
+                    int result  =DateTime.Compare(location.DateFin, DateTime.Now);
+                    if (result < 0)
+                    {
+                        ele.EstDisponible = true;
+                        _context.SaveChanges();
+                    }
+                }
             }
+            
 
         }
 
@@ -105,7 +118,7 @@ namespace ExamProject.Controllers
             DateTime endd = new DateTime(Convert.ToInt32(ed[0]), Convert.ToInt32(ed[1]), Convert.ToInt32(ed[2]));
 
             var car = _context.Voiture.Where(v => v.Id == carid).FirstOrDefault();
-           // if (car.EstDisponible == true) { 
+            if (car.EstDisponible == true) { 
             var user = _context.applicationUsers.Where(ap => ap.UserName == User.Identity.Name).First();
             Location location = new Location() {
                 DateDebut =startd,
@@ -116,9 +129,9 @@ namespace ExamProject.Controllers
                 
             };
             _context.locations.Add(location);
-             //   car.EstDisponible = false;
+                car.EstDisponible = false;
             _context.SaveChanges();
-           // }
+            }
 
             return this.Redirect("/EspaceLocataire");
         }
