@@ -21,5 +21,6 @@ namespace ExamProject.Models
         public DbSet<Model> Models { get; set; }
         public DbSet<Proprietaire> proprietaires { get; set; }
         public DbSet<Locataire> locataires { get; set; }
+        public DbSet<Location> locations { get; set; }
     }
 }

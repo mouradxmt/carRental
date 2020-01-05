@@ -4,14 +4,16 @@ using ExamProject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ExamProject.Migrations
 {
     [DbContext(typeof(CarsRentalContext))]
-    partial class CarsRentalContextModelSnapshot : ModelSnapshot
+    [Migration("20200104235432_changingModelLocation")]
+    partial class changingModelLocation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -117,7 +119,7 @@ namespace ExamProject.Migrations
 
                     b.HasIndex("VoitureId");
 
-                    b.ToTable("locations");
+                    b.ToTable("Location");
                 });
 
             modelBuilder.Entity("ExamProject.Models.Marque", b =>
@@ -176,13 +178,9 @@ namespace ExamProject.Migrations
                     b.Property<string>("Annee")
                         .IsRequired();
 
-                    b.Property<string>("ApplicationUserId");
-
                     b.Property<string>("Couleur");
 
                     b.Property<string>("Description");
-
-                    b.Property<bool>("EstDisponible");
 
                     b.Property<string>("ImagePath");
 
@@ -201,8 +199,6 @@ namespace ExamProject.Migrations
                     b.Property<int>("ProprietaireId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("MarqueID");
 
@@ -346,10 +342,6 @@ namespace ExamProject.Migrations
 
             modelBuilder.Entity("ExamProject.Models.Voiture", b =>
                 {
-                    b.HasOne("ExamProject.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId");
-
                     b.HasOne("ExamProject.Models.Marque", "Marque")
                         .WithMany()
                         .HasForeignKey("MarqueID")
