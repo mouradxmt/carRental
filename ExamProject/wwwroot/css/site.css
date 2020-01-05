@@ -3,7 +3,7 @@ for details on configuring this project to bundle and minify static web assets. 
 body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background:#efefef;
+    background: #efefef;
 }
 
 /* Wrapping element */
@@ -36,12 +36,15 @@ body {
         display: none;
     }
 }
-.margin{
-    margin:5px;
+
+.margin {
+    margin: 5px;
 }
+
 .ui.grid > .column:not(.row) {
     padding-top: 0;
 }
+
 .ui.items > .item > .image > img {
     display: block;
     width: 100%;
@@ -49,10 +52,20 @@ body {
     border: none;
     height: 340px;
 }
+
 .ui.items > .item > .image:not(.ui) {
     width: 500px;
 }
+
 .ui.items > .item > .content > .header:not(.ui) {
     margin-top: 1.2em;
     padding: 0.5em;
+}
+
+.whiteBG {
+    background: white;
+    padding: 0.7em;
+    margin: 0.7em;
+    border-left: 5px solid teal;
+    box-shadow: 0px 0px 8px -1px #ccc;
 }
