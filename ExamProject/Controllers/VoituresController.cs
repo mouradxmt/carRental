@@ -101,6 +101,7 @@ namespace ExamProject.Controllers
             }
             var currentUser = _context.applicationUsers.Where(a => a.UserName == User.Identity.Name).First();
             VM.Voiture.ProprietaireId =  currentUser.ProprietaireId ;
+            VM.Voiture.EstDisponible = true;
             _context.Voiture.Add(VM.Voiture);
             UploadImage();
             _context.SaveChanges();

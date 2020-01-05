@@ -49,10 +49,25 @@
                         <div class="ui four wide column"><span class="ui sub header">@_localizer["Mileage"]: </span></div>
                         <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.Kilometrage)</span></div>
 
+                        <div class="ui four wide column"><span class="ui sub header">@_localizer["Mileage"]: </span></div>
+                        <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.Kilometrage)</span></div>
+
 
                         <div class="ui four wide column"><span class="ui sub header">@_localizer["nom de proprietaire"]: </span></div>
-                        <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.ApplicationUser.Prenom)</span></div>
+                        <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.ApplicationUser.Nom)</span></div>
 
+                        <div class="ui four wide column"><span class="ui sub header">@_localizer["tele"]: </span></div>
+                        <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.ApplicationUser.PhoneNumber)</span></div>
+                        <div class="ui four wide column"><span class="ui sub header">@_localizer["diponibilité"]: </span></div>
+
+                        @if (item.EstDisponible)
+                        {
+                            <div class="ui twelve wide column"><span class="ui label">@_localizer["diponible"]</span></div>
+                        }
+                        else
+                        {
+                            <div class="ui twelve wide column"><span class="ui label">@_localizer["occupe"]</span></div>
+                        }
                     </div>
 
                     <span class="ui center aligned extra">
