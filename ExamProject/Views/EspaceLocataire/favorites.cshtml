@@ -7,7 +7,7 @@
         {
             <div class="ui item" style="background:white;border:1px solid #ccc;margin:1.5em;">
                 <div class="image">
-                    <img src="@Html.DisplayFor(modelItem => item.ImagePath)" />
+                    <img src="../@Html.DisplayFor(modelItem => item.ImagePath)" />
                 </div>
                 <div class="content">
 
@@ -46,18 +46,18 @@
 
                         @if (item.EstDisponible)
                         {
-                            <div class="ui twelve wide column"><span class="ui label">@_localizer["diponible"]</span></div>
+                            <div class="ui twelve wide column"><span class="ui green label">@_localizer["diponible"]</span></div>
                         }
                         else
                         {
-                            <div class="ui twelve wide column"><span class="ui label">@_localizer["occupe"]</span></div>
+                            <div class="ui twelve wide column"><span class="ui red label">@_localizer["occupe"]</span></div>
                         }
                     </div>
 
                     <span class="ui center aligned extra">
-                        <a asp-action="Details" asp-route-id="@item.Id" class="ui tiny teal labeled icon button"><i class=" ui icon info"></i>@_localizer["Details"]</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="ui tiny blue labeled icon button"><i class=" ui icon info"></i>@_localizer["Details"]</a>
                         <a asp-action="Allouer" asp-route-id="@item.Id" class="ui tiny teal labeled icon button"><i class=" ui icon plus"></i>@_localizer["Allouer"]</a>
-                        <a asp-action="ajouterFavori" asp-route-id="@item.Id" class="ui tiny teal labeled icon button"><i class=" ui icon plus"></i>@_localizer["ajouter aux favoris"]</a>
+                        <a asp-action="supprimerFavori" asp-route-id="@item.Id" class="ui tiny red labeled icon button"><i class=" ui icon star"></i>@_localizer["Remove favorite"]</a>
                     </span>
                 </div>
             </div>
