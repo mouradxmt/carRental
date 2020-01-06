@@ -1,5 +1,6 @@
 ﻿@model ExamProject.Models.Voiture
-
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _localizer
 
 @{
     ViewData["Title"] = "Details";
@@ -16,79 +17,62 @@
         <div class="">
 
         </div>
-        <div class="col-sm-10">
-            @Html.DisplayFor(model => model.PrixParJour)
-        </div>
-        <div class="">
+        <div class="ui grid description">
+            <div class="ui four wide column"><span class="ui sub header">@_localizer["Price Per Day"]: </span></div>
+            <div class="ui twelve wide column"><span class="ui tag label ui green">@Html.DisplayFor(modelItem => modelItem.PrixParJour) MAD</span></div>
+
+            <div class="ui four wide column"><span class="ui sub header">@_localizer["Make"]:</span> </div>
+            <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => modelItem.Marque.NomMarque)</span></div>
+
+            <div class="ui four wide column"><span class="ui sub header">@_localizer["Model"]:</span> </div>
+            <div class="ui twelve wide column"><span class="ui label"> @Html.DisplayFor(modelItem => modelItem.Model.NomModel)</span></div>
+
+            <div class="ui four wide column"><span class="ui sub header">@_localizer["Year"]:</span></div>
+            <span class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => modelItem.Annee)</span></span>
+
+            <div class="ui four wide column"><span class="ui sub header">@_localizer["Color"]: </span></div>
+            <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => modelItem.Couleur)</span></div>
+
+            <div class="ui four wide column"><span class="ui sub header">@_localizer["Mileage"]: </span></div>
+            <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => modelItem.Kilometrage)</span></div>
+
+            <div class="ui four wide column"><span class="ui sub header">@_localizer["Mileage"]: </span></div>
+            <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => modelItem.Kilometrage)</span></div>
+
+
+            <div class="ui four wide column"><span class="ui sub header">@_localizer["nom de proprietaire"]: </span></div>
+            <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => Model.ApplicationUser.Nom) @Html.DisplayFor(modelItem => Model.ApplicationUser.Prenom)</span></div>
+
+            <div class="ui four wide column"><span class="ui sub header">@_localizer["tele"]: </span></div>
+            <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => modelItem.ApplicationUser.PhoneNumber)</span></div>
+            <div class="ui four wide column"><span class="ui sub header">@_localizer["diponibilité"]: </span></div>
+
+            @if (Model.EstDisponible)
+            {
+                <div class="ui twelve wide column"><span class="ui label">@_localizer["diponible"]</span></div>
+            }
+            else
+            {
+                <div class="ui twelve wide column"><span class="ui label">@_localizer["occupe"]</span></div>
+            }
 
         </div>
-        <dd class="">
-            @Html.DisplayFor(model => model.Annee)
-        </dd>
-        <div class="">
-
-        </div>
-        <div class="">
-            @Html.DisplayFor(model => model.Kilometrage)
-        </div>
-        <div class="">
-
-        </div>
-        <div class="">
-            @Html.DisplayFor(model => model.Couleur)
-        </div>
-        <div class="">
-
+        <div class="ui whiteBG">
+            <div class="ui center aligned extra">
+                <a asp-controller="Voitures" asp-action="Edit" asp-route-id="@Model.Id" class="ui tiny labeled icon button blue"><i class=" ui icon edit"></i>@_localizer["Edit"]</a>
+                <a asp-controller="Voitures" asp-action="Delete" asp-route-id="@Model.Id" class="ui tiny labeled icon button red"><i class=" ui icon trash"></i>@_localizer["Delete"]</a>
+                <a asp-action="Index" class="ui tiny green labeled icon button"><i class=" ui icon arrow left"></i>@_localizer["Back to List"]</a>
+            </div>
         </div>
 
     </div>
-    <div class="ui four wide column whiteBG">
-        Lorem ipsum
 
+    <div class="ui four wide column whiteBG center aligned" style="padding-top:2em">
+        <a asp-controller="EspaceLocataire" asp-action="Allouer" asp-route-id="@Model.Id" class="ui tiny teal labeled icon big button center aligned"><i class="ui icon plus"></i>@_localizer["Allouer"]</a>
+        <hr />
+        <h3>Description</h3>
+        <div>
+            @Html.DisplayFor(modelItem => modelItem.Description)
+        </div>
     </div>
-
-</div>
-  
-<div>
-    
-    <h4>Voiture</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PrixParJour)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PrixParJour)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Annee)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Annee)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Kilometrage)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Kilometrage)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Couleur)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Couleur)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ImagePath)
-        </dt>
-        <dd class="col-sm-10">
-            <img src="model.ImagePath" />
-
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a class="ui button teal" asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
 </div>
