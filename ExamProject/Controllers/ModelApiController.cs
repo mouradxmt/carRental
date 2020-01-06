@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ExamProject.Helpers;
 using ExamProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +20,7 @@ namespace ExamProject.Controllers
         {
             db = _db;
         }
-
+        [Authorize(Roles = Roles.Admin + "," + Roles.Executive)]
         [Produces("application/json")]
         [HttpGet("search")]
         public async Task<IActionResult> Search()

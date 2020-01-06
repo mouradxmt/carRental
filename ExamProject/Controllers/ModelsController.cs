@@ -162,7 +162,7 @@ namespace ExamProject.Controllers
         //{
         //    return _context.Models.Any(e => e.Id == id);
         //}
-        [AllowAnonymous]
+        [Authorize(Roles = Roles.Admin + "," + Roles.Executive)]
         [HttpGet("api/models/{MarqueID}")]
         public IEnumerable<Model> Models(int MarqueID)
         {

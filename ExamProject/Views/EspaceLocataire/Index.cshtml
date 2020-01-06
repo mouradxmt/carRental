@@ -6,7 +6,16 @@
     ViewData["Title"] = "Index";
 }
 
+<form asp-controller="EspaceLocataire" asp-action="Index">
+    <div class="input-group mb-3">
 
+        <input type="text" id="prix" name="prix" placeholder="Enter a price" aria-describedby="basic-addon1" />
+        <input type="text" id="color" name="color" placeholder="Enter a color" aria-describedby="basic-addon1" />
+        <input type="text" id="Marque" name="Marque" placeholder="Enter a make" aria-describedby="basic-addon1" />
+        <button class="btn btn-outline-primary" type="submit">Search for post</button>
+
+    </div>
+</form>
 <p>
     <a asp-action="myRents" class="ui green button"><i class="ui icon add"></i>@_localizer["mes location"]</a>
     <a asp-action="favorites" class="ui green button"><i class="ui icon add"></i>@_localizer["mes favoris"]</a>
@@ -19,66 +28,115 @@
     </div>
 </form>
 
-    <div class="ui items">
-        @foreach (var item in Model.voitures)
-        {
-            <div class="ui item" style="background:white;border:1px solid #ccc;margin:1.5em;">
-                <div class="image">
-                    <img src="@Html.DisplayFor(modelItem => item.ImagePath)" />
-                </div>
-                <div class="content">
-
-                    <div class="header padded">@Html.DisplayFor(modelItem => item.Marque.NomMarque) @Html.DisplayFor(modelItem => item.Model.NomModel)</div>
-                    <span class="meta ui green text"> @Html.DisplayFor(modelItem => item.PrixParJour) MAD / Jour</span>
-
-                    <div class="ui grid description">
-                        <div class="ui four wide column"><span class="ui sub header">@_localizer["Price Per Day"]: </span></div>
-                        <div class="ui twelve wide column"><span class="ui tag label ui green">@Html.DisplayFor(modelItem => item.PrixParJour) MAD</span></div>
-
-                        <div class="ui four wide column"><span class="ui sub header">@_localizer["Make"]:</span> </div>
-                        <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.Marque.NomMarque)</span></div>
-
-                        <div class="ui four wide column"><span class="ui sub header">@_localizer["Model"]:</span> </div>
-                        <div class="ui twelve wide column"><span class="ui label"> @Html.DisplayFor(modelItem => item.Model.NomModel)</span></div>
-
-                        <div class="ui four wide column"><span class="ui sub header">@_localizer["Year"]:</span></div>
-                        <span class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.Annee)</span></span>
-
-                        <div class="ui four wide column"><span class="ui sub header">@_localizer["Color"]: </span></div>
-                        <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.Couleur)</span></div>
-
-                        <div class="ui four wide column"><span class="ui sub header">@_localizer["Mileage"]: </span></div>
-                        <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.Kilometrage)</span></div>
-
-                        <div class="ui four wide column"><span class="ui sub header">@_localizer["Mileage"]: </span></div>
-                        <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.Kilometrage)</span></div>
-
-
-                        <div class="ui four wide column"><span class="ui sub header">@_localizer["nom de proprietaire"]: </span></div>
-                        <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.ApplicationUser.Nom)</span></div>
-
-                        <div class="ui four wide column"><span class="ui sub header">@_localizer["tele"]: </span></div>
-                        <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.ApplicationUser.PhoneNumber)</span></div>
-                        <div class="ui four wide column"><span class="ui sub header">@_localizer["diponibilité"]: </span></div>
-
-                        @if (item.EstDisponible)
-                        {
-                            <div class="ui twelve wide column"><span class="ui label">@_localizer["diponible"]</span></div>
-                        }
-                        else
-                        {
-                            <div class="ui twelve wide column"><span class="ui label">@_localizer["occupe"]</span></div>
-                        }
-                    </div>
-
-                    <span class="ui center aligned extra">
-                        <a  asp-action="Details" asp-route-id="@item.Id" class="ui tiny teal labeled icon button"><i class=" ui icon info"></i>@_localizer["Details"]</a>
-                        <a asp-action="Allouer" asp-route-id="@item.Id" class="ui tiny teal labeled icon button"><i class=" ui icon plus"></i>@_localizer["Allouer"]</a>
-                        <a asp-action="ajouterFavori" asp-route-id="@item.Id" class="ui tiny teal labeled icon button"><i class=" ui icon plus"></i>@_localizer["ajouter aux favoris"]</a>
-                    </span>
-                </div>
+<div class="ui items">
+    @foreach (var item in Model.voitures)
+    {
+        <div class="ui item" style="background:white;border:1px solid #ccc;margin:1.5em;">
+            <div class="image">
+                <img src="@Html.DisplayFor(modelItem => item.ImagePath)" />
             </div>
-        }
-    </div>
-    <div class="clear"></div>
+            <div class="content">
+
+                <div class="header padded">@Html.DisplayFor(modelItem => item.Marque.NomMarque) @Html.DisplayFor(modelItem => item.Model.NomModel)</div>
+                <span class="meta ui green text"> @Html.DisplayFor(modelItem => item.PrixParJour) MAD / Jour</span>
+
+                <div class="ui grid description">
+                    <div class="ui four wide column"><span class="ui sub header">@_localizer["Price Per Day"]: </span></div>
+                    <div class="ui twelve wide column"><span class="ui tag label ui green">@Html.DisplayFor(modelItem => item.PrixParJour) MAD</span></div>
+
+                    <div class="ui four wide column"><span class="ui sub header">@_localizer["Make"]:</span> </div>
+                    <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.Marque.NomMarque)</span></div>
+
+                    <div class="ui four wide column"><span class="ui sub header">@_localizer["Model"]:</span> </div>
+                    <div class="ui twelve wide column"><span class="ui label"> @Html.DisplayFor(modelItem => item.Model.NomModel)</span></div>
+
+                    <div class="ui four wide column"><span class="ui sub header">@_localizer["Year"]:</span></div>
+                    <span class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.Annee)</span></span>
+
+                    <div class="ui four wide column"><span class="ui sub header">@_localizer["Color"]: </span></div>
+                    <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.Couleur)</span></div>
+
+                    <div class="ui four wide column"><span class="ui sub header">@_localizer["Mileage"]: </span></div>
+                    <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.Kilometrage)</span></div>
+
+                    <div class="ui four wide column"><span class="ui sub header">@_localizer["Mileage"]: </span></div>
+                    <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.Kilometrage)</span></div>
+
+
+                    <div class="ui four wide column"><span class="ui sub header">@_localizer["nom de proprietaire"]: </span></div>
+                    <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.ApplicationUser.Nom)</span></div>
+
+                    <div class="ui four wide column"><span class="ui sub header">@_localizer["tele"]: </span></div>
+                    <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => item.ApplicationUser.PhoneNumber)</span></div>
+                    <div class="ui four wide column"><span class="ui sub header">@_localizer["diponibilité"]: </span></div>
+
+                    @if (item.EstDisponible)
+                    {
+                        <div class="ui twelve wide column"><span class="ui label">@_localizer["diponible"]</span></div>
+                    }
+                    else
+                    {
+                        <div class="ui twelve wide column"><span class="ui label">@_localizer["occupe"]</span></div>
+                    }
+                </div>
+
+                <span class="ui center aligned extra">
+                    <a asp-action="Details" asp-route-id="@item.Id" class="ui tiny teal labeled icon button"><i class=" ui icon info"></i>@_localizer["Details"]</a>
+                    <a asp-action="Allouer" asp-route-id="@item.Id" class="ui tiny teal labeled icon button"><i class=" ui icon plus"></i>@_localizer["Allouer"]</a>
+                    <a asp-action="ajouterFavori" asp-route-id="@item.Id" class="ui tiny teal labeled icon button"><i class=" ui icon plus"></i>@_localizer["ajouter aux favoris"]</a>
+                </span>
+            </div>
+        </div>
+    }
+</div>
+<div class="clear"></div>
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    $(document).ready(function () {
+
+        //var MakeDDL = $("#Marque");
+        //var ModelDDL = $("#Model");
+        //ModelDDL.prop('disabled', true);
+        //MakeDDL.change(function () {
+        //    if ($(this).val() == "0") {
+        //        ModelDDL.prop('disabled', true);
+        //        ModelDDL.val("0");
+        //    }
+        //    else {
+        //        $.ajax({
+        //            url: "/api/models/" +$(this).val(),
+        //            method: "get",
+        //            success: function (data) {
+        //                ModelDDL.prop('disabled', false);
+        //                ModelDDL.empty();
+        //                ModelDDL.append($('<option/>', { value: '0', text: '--Select Model--' }));
+        //                $(data).each(function (index, item) {
+        //                    ModelDDL.append($('<option/>', { value: item.id, text: item.nomModel }));
+        //                });
+        //            }
+        //        });
+        //    }
+        //});
+
+        //$("#Model").autocomplete({
+        //    source: 'api/voitureapi/searchml' + $("#Marque").val(),
+        //    });
+
+
+            $("#Marque").autocomplete({
+                source: 'api/espacelocataireapi/searchmk'
+            });
+            $("#prix").autocomplete({
+                source: 'api/espacelocataireapi/searchp'
+            });
+            $("#color").autocomplete({
+            source: 'api/espacelocataireapi/searchc'
+            });
+
+        });</script>
+
+}
+
 

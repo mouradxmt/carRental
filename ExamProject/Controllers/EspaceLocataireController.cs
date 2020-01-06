@@ -53,13 +53,33 @@ namespace ExamProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(string keyword="")
+        public IActionResult Index(string color, string Marque, string prix,string keyword="")
         {
-            if (String.IsNullOrEmpty(keyword)) return Index();
-            espaceLocataireVM.voitures = _context.Voiture.Include(v => v.Marque).Include(v => v.Model).Where(v=>v.Marque.NomMarque.Contains(keyword) || v.Model.NomModel.Contains(keyword)).ToList();
-            ViewBag.keyword = keyword;
-            return View(espaceLocataireVM);
-
+            if (color != null || Marque != null || prix != null)  /*Contains("")*/
+            {
+                if (color == null)
+                {
+                    color = "";
+                }
+                if (Marque == null)
+                {
+                    Marque = "";
+                }
+                if (prix == null)
+                {
+                    prix = "";
+                }
+                espaceLocataireVM.voitures = _context.Voiture.Where(p => p.Couleur.Contains(color) && p.Marque.NomMarque.Contains(Marque) && p.PrixParJour.Contains(prix)).ToList();
+                //var marquedata = _context.Voiture.Where(A) ;
+                return View(espaceLocataireVM);
+            }
+            else
+            {
+                if (String.IsNullOrEmpty(keyword)) return Index();
+                espaceLocataireVM.voitures = _context.Voiture.Include(v => v.Marque).Include(v => v.Model).Where(v => v.Marque.NomMarque.Contains(keyword) || v.Model.NomModel.Contains(keyword)).ToList();
+                ViewBag.keyword = keyword;
+                return View(espaceLocataireVM);
+            }
         }
 
 
