@@ -141,9 +141,30 @@ namespace ExamProject.Controllers
         public IActionResult ajouterFavori(int id)
         {
             var currentUser = _context.applicationUsers.Where(a => a.UserName == User.Identity.Name).First();
-            var favo = new Favori() { idlocataire = currentUser.LocataireId, idvoiture = id };
-            _context.favoris.Add(favo);
-            _context.SaveChanges();
+
+            var test = _context.favoris.FirstOrDefault(f => f.idlocataire == currentUser.LocataireId && f.idvoiture == id);
+            if (test == null)
+            {
+                var favo = new Favori() { idlocataire = currentUser.LocataireId, idvoiture = id };
+                _context.favoris.Add(favo);
+                _context.SaveChanges();
+            }
+            
+            return this.Redirect("/EspaceLocataire");
+        }
+
+        public IActionResult supprimerFavori(int id)
+        {
+            var currentUser = _context.applicationUsers.Where(a => a.UserName == User.Identity.Name).First();
+
+            var test = _context.favoris.FirstOrDefault(f => f.idlocataire == currentUser.LocataireId && f.idvoiture == id);
+            if (test != null)
+            {
+                
+                _context.favoris.Remove(test);
+                _context.SaveChanges();
+            }
+
             return this.Redirect("/EspaceLocataire");
         }
         public IActionResult favorites()
@@ -170,6 +191,8 @@ namespace ExamProject.Controllers
 
             return View(location);
         }
+
+        
 
         
     }
