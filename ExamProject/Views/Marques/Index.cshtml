@@ -6,7 +6,14 @@
 }
 
 <h1>Index</h1>
+<form asp-controller="Marques" asp-action="Index">
+    <div class="input-group mb-3">
+        <input type="text" id="marques" name="marques" placeholder="Enter your keyword" aria-describedby="basic-addon1" />
 
+        <button class="btn btn-outline-primary" type="submit">Search for post</button>
+
+    </div>
+</form>
 <p>
     <a asp-action="Create">@_localizer["Create New"]</a>
 </p>
@@ -35,3 +42,13 @@
         }
     </tbody>
 </table>
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+$(document).ready(function () {
+            $("#marques").autocomplete({
+                source: 'api/marqueapi/search'
+            });
+        });</script>
+}

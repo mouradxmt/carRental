@@ -39,11 +39,39 @@ namespace ExamProject.Controllers
         }
 
         // GET: Voitures
-        public IActionResult Index()
+        public IActionResult Index(string annees, string color, string Marque, string prix)
         {
             var currentUser = _context.applicationUsers.Where(a => a.UserName == User.Identity.Name).First();
-            var voitures = _context.Voiture.Include(m => m.Marque).Include(m => m.Model).Where(v => v.ProprietaireId == currentUser.ProprietaireId); ;
-            return View(voitures);
+            if (annees != null || color != null || Marque != null || prix != null)  /*Contains("")*/
+            {
+                if (color == null)
+                {
+                    color = "";
+                }
+                if (Marque == null)
+                {
+                    Marque = "";
+                }
+                if (annees == null)
+
+
+                {
+                    annees = "";
+                }
+                if (prix == null)
+                {
+                    prix = "";
+                }
+                var marquedata = _context.Voiture.Where(p => p.Annee.Contains(annees) && p.Couleur.Contains(color) && p.Marque.NomMarque.Contains(Marque) && p.PrixParJour.Contains(prix)).ToList();
+                //var marquedata = _context.Voiture.Where(A) ;
+                return View(marquedata);
+            }
+            else
+            {
+                var voitures = _context.Voiture.Include(m => m.Marque).Include(m => m.Model).Where(v => v.ProprietaireId == currentUser.ProprietaireId);
+                return View(voitures);
+            }
+
         }
 
         

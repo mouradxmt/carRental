@@ -29,10 +29,19 @@ namespace ExamProject.Controllers
         //}
 
         // GET: Marques
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string marques)
         {
-            return View(await _context.Marques.ToListAsync());
+            if (marques != null)
+            {
+                var marquedata = _context.Marques.Where(p => p.NomMarque.Contains(marques)).ToList();
+                return View(marquedata);
+            }
+            else
+            {
+                return View(await _context.Marques.ToListAsync());
+            }
         }
+
 
         // GET: Marques/Details/5
         public async Task<IActionResult> Details(int? id)
