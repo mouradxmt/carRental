@@ -145,12 +145,19 @@ namespace ExamProject.Controllers
                 DateFin =endd,
                 LocataireId =user.LocataireId,
                 PrixTotal=(endd-startd).TotalDays * Convert.ToDouble(car.PrixParJour),
-                VoitureId =carid
+                VoitureId =carid,
+                statut="demande envoyé"
                 
             };
+               
+
             _context.locations.Add(location);
                 car.EstDisponible = false;
             _context.SaveChanges();
+                var locationid = _context.locations.Max(l => l.Id);
+                Demande demande = new Demande() { etat = "envoyé", LocationId = locationid, };
+                _context.demande.Add(demande);
+                _context.SaveChanges();
             }
 
             return this.Redirect("/EspaceLocataire");

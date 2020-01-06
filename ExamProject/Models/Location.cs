@@ -15,7 +15,9 @@ namespace ExamProject.Models
 
         public Double PrixTotal { get; set; }
 
-        public bool statut { get; set; }
+        public string statut { get; set; }
 
     }
+
+    
 }

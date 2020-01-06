@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Locataire)
+                @Html.DisplayNameFor(model => model.statut)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Voiture)
@@ -34,10 +34,11 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Locataire.Id)
+                @Html.DisplayFor(modelItem => item.statut)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Voiture.Annee)
+                @Html.DisplayFor(modelItem => item.Voiture.Marque.NomMarque )
+                @Html.DisplayFor(modelItem => item.Voiture.Model.NomModel )
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DateDebut)
