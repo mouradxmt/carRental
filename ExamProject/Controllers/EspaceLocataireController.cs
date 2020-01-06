@@ -70,7 +70,7 @@ namespace ExamProject.Controllers
                 return NotFound();
             }
 
-            var voiture = espaceLocataireVM.voitures
+            var voiture = _context.Voiture.Include(v => v.Marque).Include(v => v.Model)
                 .First(m => m.Id == id);
             if (voiture == null)
             {
@@ -136,11 +136,33 @@ namespace ExamProject.Controllers
             return this.Redirect("/EspaceLocataire");
         }
 
-        
 
-        
 
-       
+        public IActionResult ajouterFavori(int id)
+        {
+            var currentUser = _context.applicationUsers.Where(a => a.UserName == User.Identity.Name).First();
+            var favo = new Favori() { idlocataire = currentUser.LocataireId, idvoiture = id };
+            _context.favoris.Add(favo);
+            _context.SaveChanges();
+            return this.Redirect("/EspaceLocataire");
+        }
+        public IActionResult favorites()
+        {
+
+            var voitures = new List<Voiture>();
+            var currentUser = _context.applicationUsers.Where(a => a.UserName == User.Identity.Name).First();
+            var fav = _context.favoris.Where(f => f.idlocataire == currentUser.LocataireId).ToList();
+            foreach(var ele in fav)
+            {
+                var voiture =_context.Voiture.Include(v => v.Marque).Include(v => v.Model).FirstOrDefault(v=>v.Id==ele.idvoiture);
+                voitures.Add(voiture);
+            }
+
+            EspaceLocataireVM vm = new EspaceLocataireVM() { voitures=voitures };
+            return View(vm);
+        }
+
+
         public async Task<IActionResult> myRents()
         {
             var user = _context.applicationUsers.Where(ap => ap.UserName == User.Identity.Name).First();

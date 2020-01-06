@@ -35,10 +35,18 @@ namespace ExamProject.Controllers
         }
 
         // GET: Models
-        public IActionResult Index()
+        public IActionResult Index(string models)
         {
-            var model = _context.Models.Include(m => m.Marque);
-            return View(model.ToList());
+            if (models != null)
+            {
+                var marquedata = _context.Models.Where(p => (p.NomModel.Contains(models)) || p.Marque.NomMarque.Contains(models)).ToList();
+                return View(marquedata);
+            }
+            else
+            {
+                var model = _context.Models.Include(m => m.Marque);
+                return View(model.ToList());
+            }
         }
 
         // GET: Models/Details/5

@@ -2,23 +2,6 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer _localizer
 
-@{
-    ViewData["Title"] = "Index";
-}
-
-
-<p>
-    <a asp-action="myRents" class="ui green button"><i class="ui icon add"></i>@_localizer["mes location"]</a>
-    <a asp-action="favorites" class="ui green button"><i class="ui icon add"></i>@_localizer["mes favoris"]</a>
-</p>
-
-<form method="post" enctype="multipart/form-data" asp-action="Index">
-    <div class="ui fluid icon input center">
-        <input type="text" asp-for="searchedCar" name="keyword" value="@ViewBag.keyword" placeholder="Search a very wide input...">
-        <i class="search icon"></i>
-    </div>
-</form>
-
     <div class="ui items">
         @foreach (var item in Model.voitures)
         {
@@ -72,7 +55,7 @@
                     </div>
 
                     <span class="ui center aligned extra">
-                        <a  asp-action="Details" asp-route-id="@item.Id" class="ui tiny teal labeled icon button"><i class=" ui icon info"></i>@_localizer["Details"]</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="ui tiny teal labeled icon button"><i class=" ui icon info"></i>@_localizer["Details"]</a>
                         <a asp-action="Allouer" asp-route-id="@item.Id" class="ui tiny teal labeled icon button"><i class=" ui icon plus"></i>@_localizer["Allouer"]</a>
                         <a asp-action="ajouterFavori" asp-route-id="@item.Id" class="ui tiny teal labeled icon button"><i class=" ui icon plus"></i>@_localizer["ajouter aux favoris"]</a>
                     </span>
@@ -80,5 +63,3 @@
             </div>
         }
     </div>
-    <div class="clear"></div>
-

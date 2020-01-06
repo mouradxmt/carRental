@@ -4,14 +4,16 @@ using ExamProject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ExamProject.Migrations
 {
     [DbContext(typeof(CarsRentalContext))]
-    partial class CarsRentalContextModelSnapshot : ModelSnapshot
+    [Migration("20200106183249_voiturefavori")]
+    partial class voiturefavori
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,21 +84,6 @@ namespace ExamProject.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("ExamProject.Models.Favori", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("idlocataire");
-
-                    b.Property<int>("idvoiture");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("favoris");
                 });
 
             modelBuilder.Entity("ExamProject.Models.Locataire", b =>

@@ -5,14 +5,10 @@ using System.Threading.Tasks;
 
 namespace ExamProject.Models
 {
-    public class Locataire 
+    public class Favori
     {
-
         public int Id { get; set; }
-       
-
-        public List<Location> Locations { get; set; }
-        public List<Voiture> voituresfavoris { get; set; }
-
+        public int idvoiture { get; set; }
+        public int idlocataire { get; set; }
     }
 }

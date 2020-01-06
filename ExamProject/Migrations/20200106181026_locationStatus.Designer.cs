@@ -4,14 +4,16 @@ using ExamProject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ExamProject.Migrations
 {
     [DbContext(typeof(CarsRentalContext))]
-    partial class CarsRentalContextModelSnapshot : ModelSnapshot
+    [Migration("20200106181026_locationStatus")]
+    partial class locationStatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,21 +84,6 @@ namespace ExamProject.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("ExamProject.Models.Favori", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("idlocataire");
-
-                    b.Property<int>("idvoiture");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("favoris");
                 });
 
             modelBuilder.Entity("ExamProject.Models.Locataire", b =>
@@ -208,8 +195,6 @@ namespace ExamProject.Migrations
                     b.Property<string>("Kilometrage")
                         .IsRequired();
 
-                    b.Property<int?>("LocataireId");
-
                     b.Property<int>("MarqueID");
 
                     b.Property<int>("ModelID");
@@ -222,8 +207,6 @@ namespace ExamProject.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("LocataireId");
 
                     b.HasIndex("MarqueID");
 
@@ -370,10 +353,6 @@ namespace ExamProject.Migrations
                     b.HasOne("ExamProject.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
                         .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("ExamProject.Models.Locataire")
-                        .WithMany("voituresfavoris")
-                        .HasForeignKey("LocataireId");
 
                     b.HasOne("ExamProject.Models.Marque", "Marque")
                         .WithMany()
