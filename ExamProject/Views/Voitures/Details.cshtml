@@ -39,12 +39,6 @@
             <div class="ui four wide column"><span class="ui sub header">@_localizer["Mileage"]: </span></div>
             <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => modelItem.Kilometrage)</span></div>
 
-
-            <div class="ui four wide column"><span class="ui sub header">@_localizer["nom de proprietaire"]: </span></div>
-            <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => Model.ApplicationUser.Nom) @Html.DisplayFor(modelItem => Model.ApplicationUser.Prenom)</span></div>
-
-            <div class="ui four wide column"><span class="ui sub header">@_localizer["tele"]: </span></div>
-            <div class="ui twelve wide column"><span class="ui label">@Html.DisplayFor(modelItem => modelItem.ApplicationUser.PhoneNumber)</span></div>
             <div class="ui four wide column"><span class="ui sub header">@_localizer["diponibilité"]: </span></div>
 
             @if (Model.EstDisponible)
@@ -68,11 +62,16 @@
     </div>
 
     <div class="ui four wide column whiteBG center aligned" style="padding-top:2em">
-        <a asp-controller="EspaceLocataire" asp-action="Allouer" asp-route-id="@Model.Id" class="ui tiny teal labeled icon big button center aligned"><i class="ui icon plus"></i>@_localizer["Allouer"]</a>
-        <hr />
+
         <h3>Description</h3>
         <div>
             @Html.DisplayFor(modelItem => modelItem.Description)
+        </div>
+        <hr />
+        <div>
+            <h3>Historique</h3>
+            Lorem ipsum bla bla bla
+            bla bla bla bla bla bla
         </div>
     </div>
 </div>

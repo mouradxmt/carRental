@@ -7,9 +7,9 @@
 }
 
 
-<p>
-    <a asp-action="myRents" class="ui green button"><i class="ui icon add"></i>@_localizer["mes location"]</a>
-</p>
+<div style="margin:2em">
+    <a asp-action="myRents" class="ui green button"><i class="ui icon history"></i>@_localizer["My Rents"]</a>
+</div>
 
 <form method="post" enctype="multipart/form-data" asp-action="Index">
     <div class="ui fluid icon input center">
@@ -62,11 +62,11 @@
 
                         @if (item.EstDisponible)
                         {
-                            <div class="ui twelve wide column"><span class="ui label">@_localizer["diponible"]</span></div>
+                            <div class="ui twelve wide column"><span class="ui green label">@_localizer["diponible"]</span></div>
                         }
                         else
                         {
-                            <div class="ui twelve wide column"><span class="ui label">@_localizer["occupe"]</span></div>
+                            <div class="ui twelve wide column"><span class="ui red label">@_localizer["occupe"]</span></div>
                         }
                     </div>
 
