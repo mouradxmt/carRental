@@ -7,6 +7,16 @@
 }
 
     <div style="width:80%;margin:auto">
+        <form asp-controller="EspaceLocataire" asp-action="Index">
+            <div class="ui form">
+                <div class="four fields">
+                    <input type="text" id="prix" class="ui field input" name="prix" placeholder="@_localizer["Enter a price"]" aria-describedby="basic-addon1" />
+                    <input type="text" id="color" class="ui field input" name="color" placeholder="@_localizer["Enter a color"]" aria-describedby="basic-addon1" />
+                    <input type="text" id="Marque" class="ui field input" name="Marque" placeholder="@_localizer["Enter a make"]" aria-describedby="basic-addon1" />
+                    <button type="submit" class="ui tiny teal labeled icon button field"><i class=" ui icon search"></i>@_localizer["Search by criteria"]</button>
+                </div>
+            </div>
+        </form>
         <p>
             <a asp-action="myRents" class="ui blue button"><i class="ui icon car"></i>@_localizer["My rents"]</a>
             <a asp-action="favorites" class="ui yellow button"><i class="ui icon star"></i>@_localizer["My favorits"]</a>
