@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<ExamProject.Models.Voiture>
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer _localizer
-
+@using ExamProject.Helpers
 @{
     ViewData["Title"] = "Index";
 }
 
-    <h1>@_localizer["My cars"]</h1>
+<h1>@_localizer["My cars"]</h1>
 <form asp-controller="Voitures" asp-action="Index">
     <div class="ui form">
         <div class="four fields">
@@ -14,7 +14,7 @@
             <input type="text" id="color" class="ui field input" name="color" placeholder="@_localizer["Enter a color"]" aria-describedby="basic-addon1" />
             <input type="text" id="Marque" class="ui field input" name="Marque" placeholder="@_localizer["Enter a make"]" aria-describedby="basic-addon1" />
             <button type="submit" class="ui tiny teal labeled icon button field"><i class=" ui icon search"></i>@_localizer["Search by criteria"]</button>
-</div>
+        </div>
     </div>
 </form>
 <p>
@@ -58,8 +58,10 @@
                 </div>
 
                 <span class="ui center aligned extra">
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="ui tiny labeled icon button blue"><i class=" ui icon edit"></i>@_localizer["Edit"]</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="ui tiny labeled icon button red"><i class=" ui icon trash"></i>@_localizer["Delete"]</a>
+                    @if (User.IsInRole(Roles.Admin) || User.IsInRole(Roles.Executive))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="ui tiny labeled icon button blue"><i class=" ui icon edit"></i>@_localizer["Edit"]</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="ui tiny labeled icon button red"><i class=" ui icon trash"></i>@_localizer["Delete"]</a>}
                     <a asp-action="Details" asp-route-id="@item.Id" class="ui tiny teal labeled icon button"><i class=" ui icon info"></i>@_localizer["Details"]</a>
                 </span>
             </div>
@@ -71,35 +73,35 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-    $(document).ready(function () {
+        $(document).ready(function () {
 
-        //var MakeDDL = $("#Marque");
-        //var ModelDDL = $("#Model");
-        //ModelDDL.prop('disabled', true);
-        //MakeDDL.change(function () {
-        //    if ($(this).val() == "0") {
-        //        ModelDDL.prop('disabled', true);
-        //        ModelDDL.val("0");
-        //    }
-        //    else {
-        //        $.ajax({
-        //            url: "/api/models/" +$(this).val(),
-        //            method: "get",
-        //            success: function (data) {
-        //                ModelDDL.prop('disabled', false);
-        //                ModelDDL.empty();
-        //                ModelDDL.append($('<option/>', { value: '0', text: '--Select Model--' }));
-        //                $(data).each(function (index, item) {
-        //                    ModelDDL.append($('<option/>', { value: item.id, text: item.nomModel }));
-        //                });
-        //            }
-        //        });
-        //    }
-        //});
+            //var MakeDDL = $("#Marque");
+            //var ModelDDL = $("#Model");
+            //ModelDDL.prop('disabled', true);
+            //MakeDDL.change(function () {
+            //    if ($(this).val() == "0") {
+            //        ModelDDL.prop('disabled', true);
+            //        ModelDDL.val("0");
+            //    }
+            //    else {
+            //        $.ajax({
+            //            url: "/api/models/" +$(this).val(),
+            //            method: "get",
+            //            success: function (data) {
+            //                ModelDDL.prop('disabled', false);
+            //                ModelDDL.empty();
+            //                ModelDDL.append($('<option/>', { value: '0', text: '--Select Model--' }));
+            //                $(data).each(function (index, item) {
+            //                    ModelDDL.append($('<option/>', { value: item.id, text: item.nomModel }));
+            //                });
+            //            }
+            //        });
+            //    }
+            //});
 
-        //$("#Model").autocomplete({
-        //    source: 'api/voitureapi/searchml' + $("#Marque").val(),
-        //    });
+            //$("#Model").autocomplete({
+            //    source: 'api/voitureapi/searchml' + $("#Marque").val(),
+            //    });
 
 
             $("#Marque").autocomplete({
@@ -109,7 +111,7 @@
                 source: 'api/voitureapi/searchp'
             });
             $("#color").autocomplete({
-            source: 'api/voitureapi/searchc'
+                source: 'api/voitureapi/searchc'
             });
 
         });</script>

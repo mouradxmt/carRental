@@ -1,0 +1,19 @@
+﻿@model ApplicationUser
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _localizer
+@{
+    ViewData["Title"] = "GiveRole";
+}
+
+<h2>GiveRoleAsync</h2>
+
+<h3>@_localizer["Are you sure you want to do this?"] : <span class="ui green label">@_localizer["User Name"] : @Html.DisplayFor(model => model.UserName)</span></h3>
+
+
+<form asp-action="GiveRoleAsync">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="ui tiny labeled icon button red"><i class=" ui icon green"></i>@_localizer["Add To List"]</button>
+    <a asp-action="GetUsers">@_localizer["Back to List"]</a>
+</form>
+
+

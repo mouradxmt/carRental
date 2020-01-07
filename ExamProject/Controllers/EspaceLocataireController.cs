@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ExamProject.Models;
 using ExamProject.Models.viewModel;
+using Microsoft.AspNetCore.Identity;
+using ExamProject.Helpers;
 
 namespace ExamProject.Controllers
 {
@@ -14,8 +16,10 @@ namespace ExamProject.Controllers
     {
         private readonly CarsRentalContext _context;
         EspaceLocataireVM espaceLocataireVM;
+        private readonly UserManager<ApplicationUser> userManager;
+        public ApplicationUser ApplicationUser;
 
-        public EspaceLocataireController(CarsRentalContext context)
+        public EspaceLocataireController(CarsRentalContext context, UserManager<ApplicationUser> _userManager)
         {
             _context = context;
             espaceLocataireVM = new EspaceLocataireVM()
@@ -24,7 +28,8 @@ namespace ExamProject.Controllers
                 searchedCar = ""
 
             };
-            foreach(var ele in espaceLocataireVM.voitures)
+            userManager = _userManager;
+            foreach (var ele in espaceLocataireVM.voitures)
             {
                 var appuser = _context.applicationUsers.Where(ap => ap.ProprietaireId == ele.ProprietaireId).First();
                 ele.ApplicationUser = appuser;
@@ -82,6 +87,71 @@ namespace ExamProject.Controllers
             }
         }
 
+        public async Task<IActionResult> GetUsers()
+        {
+            var users = userManager.Users;
+            List<ApplicationUser> usersList = new List<ApplicationUser>();
+            foreach (var user in userManager.Users)
+            {
+                if (!(await userManager.IsInRoleAsync(user, Roles.Executive) || await userManager.IsInRoleAsync(user, Roles.Executive)))
+                {
+                    usersList.Add(user);
+                }
+            }
+            return View(usersList);
+        }
+        public async Task<IActionResult> GetUsers2()
+        {
+            var users = userManager.Users;
+            List<ApplicationUser> usersList = new List<ApplicationUser>();
+            foreach (var user in userManager.Users)
+            {
+                if (await userManager.IsInRoleAsync(user, Roles.Executive) || await userManager.IsInRoleAsync(user, Roles.Executive))
+                {
+                    usersList.Add(user);
+                }
+            }
+            return View(usersList);
+        }
+        // GET: EspaceLocataire/RemoveRoleAsync
+        [HttpGet]
+        public async Task<IActionResult> RemoveRole(string Id)
+        {
+
+            ApplicationUser = await userManager.FindByIdAsync(Id.ToString());
+            //await userManager.RemoveFromRoleAsync(user, Roles.Executive);
+            //var users = userManager.Users;
+            return View(ApplicationUser);
+        }
+        [HttpPost]
+        public async Task<IActionResult> RemoveRoleAsync(string Id)
+        {
+
+            var user = await userManager.FindByIdAsync(Id.ToString());
+            await userManager.RemoveFromRoleAsync(user, Roles.Executive);
+            var users = userManager.Users;
+            return RedirectToAction(nameof(GetUsers));
+        }
+
+        // GET: EspaceLocataire/RemoveRoleAsync
+        [HttpGet]
+        public async Task<IActionResult> GiveRole(string Id)
+        {
+
+            ApplicationUser = await userManager.FindByIdAsync(Id.ToString());
+            //await userManager.RemoveFromRoleAsync(user, Roles.Executive);
+            //var users = userManager.Users;
+            return View(ApplicationUser);
+        }
+        [HttpPost]
+        public async Task<IActionResult> GiveRoleAsync(string Id)
+        {
+
+            var user = await userManager.FindByIdAsync(Id.ToString());
+            await userManager.AddToRoleAsync(user, Roles.Executive);
+            var users = userManager.Users;
+            return RedirectToAction(nameof(GetUsers));
+        }
 
         public IActionResult Details(int? id)
         {

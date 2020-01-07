@@ -1,7 +1,7 @@
 ﻿@model ExamProject.Models.Voiture
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer _localizer
-
+@using ExamProject.Helpers
 @{
     ViewData["Title"] = "Details";
 }
@@ -59,20 +59,24 @@
         </div>
         <div class="ui whiteBG">
             <div class="ui center aligned extra">
-                <a asp-controller="Voitures" asp-action="Edit" asp-route-id="@Model.Id" class="ui tiny labeled icon button blue"><i class=" ui icon edit"></i>@_localizer["Edit"]</a>
-                <a asp-controller="Voitures" asp-action="Delete" asp-route-id="@Model.Id" class="ui tiny labeled icon button red"><i class=" ui icon trash"></i>@_localizer["Delete"]</a>
-                <a asp-action="Index" class="ui tiny green labeled icon button"><i class=" ui icon arrow left"></i>@_localizer["Back to List"]</a>
-            </div>
+                @if (User.IsInRole(Roles.Admin))
+                {
+                    <a asp-controller="Voitures" asp-action="Edit" asp-route-id="@Model.Id" class="ui tiny labeled icon button blue"><i class=" ui icon edit"></i>@_localizer["Edit"]</a>
+                    <a asp-controller="Voitures" asp-action="Delete" asp-route-id="@Model.Id" class="ui tiny labeled icon button red"><i class=" ui icon trash"></i>@_localizer["Delete"]</a>}
+                    <a asp-action="Index" class="ui tiny green labeled icon button"><i class=" ui icon arrow left"></i>@_localizer["Back to List"]</a>
+                </div>
         </div>
 
     </div>
 
     <div class="ui four wide column whiteBG center aligned" style="padding-top:2em">
-        <a asp-action="Allouer" asp-route-id="@Model.Id" class="ui tiny teal labeled icon big button center aligned"><i class="ui icon plus"></i>@_localizer["Allouer"]</a>
-        <br />
-        <br />
-        <a asp-action="ajouterFavori" asp-route-id="@Model.Id" class="ui tiny yellow labeled icon button"><i class=" ui icon star"></i>@_localizer["ajouter aux favoris"]</a>
-        <hr />
+        @if (User.IsInRole(Roles.Admin) || User.IsInRole(Roles.Executive))
+        {
+            <a asp-action="Allouer" asp-route-id="@Model.Id" class="ui tiny teal labeled icon big button center aligned"><i class="ui icon plus"></i>@_localizer["Allouer"]</a>
+            <br />
+            <br />
+            <a asp-action="ajouterFavori" asp-route-id="@Model.Id" class="ui tiny yellow labeled icon button"><i class=" ui icon star"></i>@_localizer["ajouter aux favoris"]</a>
+            <hr />}
         <h3>Description</h3>
         <div>
             @Html.DisplayFor(modelItem => modelItem.Description)

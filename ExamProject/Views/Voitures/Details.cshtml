@@ -1,7 +1,7 @@
 ﻿@model ExamProject.Models.Voiture
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer _localizer
-
+@using ExamProject.Helpers
 @{
     ViewData["Title"] = "Details";
 }
@@ -53,8 +53,10 @@
         </div>
         <div class="ui whiteBG">
             <div class="ui center aligned extra">
-                <a asp-controller="Voitures" asp-action="Edit" asp-route-id="@Model.Id" class="ui tiny labeled icon button blue"><i class=" ui icon edit"></i>@_localizer["Edit"]</a>
-                <a asp-controller="Voitures" asp-action="Delete" asp-route-id="@Model.Id" class="ui tiny labeled icon button red"><i class=" ui icon trash"></i>@_localizer["Delete"]</a>
+                @if (User.IsInRole(Roles.Admin) || User.IsInRole(Roles.Executive))
+                {
+                    <a asp-controller="Voitures" asp-action="Edit" asp-route-id="@Model.Id" class="ui tiny labeled icon button blue"><i class=" ui icon edit"></i>@_localizer["Edit"]</a>
+                    <a asp-controller="Voitures" asp-action="Delete" asp-route-id="@Model.Id" class="ui tiny labeled icon button red"><i class=" ui icon trash"></i>@_localizer["Delete"]</a>}
                 <a asp-action="Index" class="ui tiny green labeled icon button"><i class=" ui icon arrow left"></i>@_localizer["Back to List"]</a>
             </div>
         </div>
