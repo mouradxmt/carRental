@@ -38,9 +38,10 @@
                     @if (User.IsInRole(Roles.Admin) || User.IsInRole(Roles.Executive))
                     {
                         <li><a asp-area="" asp-controller="Voitures" asp-action="">Espace Proprietaire</a></li>
-                    }
+                    
                     <li><a asp-area="" asp-controller="EspaceLocataire" asp-action="Index">Espace Locataire</a></li>
-                    @if (User.IsInRole(Roles.Admin) || User.IsInRole(Roles.Executive))
+                    }
+                    @if (User.IsInRole(Roles.Admin))
                     {
                         <li><a asp-area="" asp-controller="Models" asp-action="">Models</a></li>
                         <li><a asp-area="" asp-controller="Marques" asp-action="">Marques</a></li>
@@ -54,6 +55,7 @@
                             <li class="nav-item"><a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Add User</a></li>
                         }
                     </ul>
+
                 <partial name="_LoginPartial" />
             </div>
         </div>

@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Localization;
 
 namespace ExamProject.Controllers
 {
-    [Authorize(Roles = Roles.Admin + "," + Roles.Executive)]
+    [Authorize(Roles = Roles.Admin)]
     public class ModelsController : Controller
     {
         private readonly IStringLocalizer<ModelsController> _localizer;

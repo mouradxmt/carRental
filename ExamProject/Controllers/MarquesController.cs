@@ -12,7 +12,7 @@ using Microsoft.Extensions.Localization;
 
 namespace ExamProject.Controllers
 {
-    [Authorize(Roles = Roles.Admin + "," + Roles.Executive)]
+    [Authorize(Roles = Roles.Admin)]
     public class MarquesController : Controller
     {
         private readonly CarsRentalContext _context;
