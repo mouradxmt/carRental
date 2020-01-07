@@ -5,6 +5,10 @@
     {
       "library": "semantic-ui@2.4.1",
       "destination": "wwwroot/lib/semantic-ui/"
+    },
+    {
+      "library": "jqueryui@1.12.1",
+      "destination": "wwwroot/lib/jqueryui/"
     }
   ]
 }

@@ -129,4 +129,16 @@
   <data name="Edit" xml:space="preserve">
     <value>Editer</value>
   </data>
+  <data name="Enter your keyword" xml:space="preserve">
+    <value>Entrer votre mot-clé</value>
+  </data>
+  <data name="Make name" xml:space="preserve">
+    <value>Nom de marque</value>
+  </data>
+  <data name="Makes" xml:space="preserve">
+    <value>Marques</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Chercher</value>
+  </data>
 </root>

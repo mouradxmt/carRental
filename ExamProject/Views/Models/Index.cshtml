@@ -5,19 +5,20 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>@_localizer["Models"]</h1>
 <form asp-controller="Models" asp-action="Index">
-    <div class="input-group mb-3">
-        <input type="text" id="models" name="models" placeholder="Enter your keyword" aria-describedby="basic-addon1" />
-
-        <button class="btn btn-outline-primary" type="submit">Search for post</button>
-
+    <div class="ui form">
+        <div class="inline fields">
+            <div class="ui eight wide field"><input type="text" id="models" name="models" placeholder="@_localizer["Enter your keyword"]" aria-describedby="basic-addon1" /></div>
+            <div class="ui four wide field"><button type="submit" class="ui tiny teal labeled icon button"><i class=" ui icon search"></i>@_localizer["Search"]</button></div>
+        </div>
     </div>
 </form>
 <p>
-    <a asp-action="Create">@_localizer["Create New"]</a>
+
+    <a asp-action="Create" class="ui green button"><i class="ui icon add"></i>@_localizer["Create New"]</a>
 </p>
-<table class="table">
+<table class="ui striped table">
     <thead>
         <tr>
             <th>
@@ -52,7 +53,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-$(document).ready(function () {
+        $(document).ready(function () {
             $("#models").autocomplete({
                 source: 'api/modelapi/search'
             });

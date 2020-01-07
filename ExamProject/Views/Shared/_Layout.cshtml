@@ -7,7 +7,8 @@
     <title>@ViewData["Title"] - ExamProject</title>
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <link href="~/lib/jqueryui/jquery-ui.css" rel="stylesheet" />
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link href="~/lib/semantic-ui/semantic.css" rel="stylesheet" />
@@ -52,21 +53,21 @@
 
     <partial name="_CookieConsentPartial" />
 
-    <div class="container body-content">
+    <div style="width:95%;margin:auto">
         @if (User.IsInRole(Roles.Admin) || User.IsInRole(Roles.Executive))
         {
-        <div class="ui breadcrumb">
-            <a class="section" asp-controller="Home" asp-action="Index"><i class="ui icon home"></i>Car Rental</a>
-            <i class="right chevron icon divider"></i>
-            <a asp-area="" asp-controller="@this.ViewContext.RouteData.Values["controller"].ToString()" asp-action="Index" class="section">@this.ViewContext.RouteData.Values["controller"].ToString()</a>
-            <i class="right chevron icon divider"></i>
-            <div class="active section">@this.ViewContext.RouteData.Values["action"].ToString()</div>
-        </div>
+            <div class="ui breadcrumb">
+                <a class="section" asp-controller="Home" asp-action="Index"><i class="ui icon home"></i>Car Rental</a>
+                <i class="right chevron icon divider"></i>
+                <a asp-area="" asp-controller="@this.ViewContext.RouteData.Values["controller"].ToString()" asp-action="Index" class="section">@this.ViewContext.RouteData.Values["controller"].ToString()</a>
+                <i class="right chevron icon divider"></i>
+                <div class="active section">@this.ViewContext.RouteData.Values["action"].ToString()</div>
+            </div>
         }
         @RenderBody()
 
     </div>
-    <hr style="border-top:1px solid #ccc;"/>
+    <hr style="border-top:1px solid #ccc;" />
     <footer>
         @{
             string year = DateTime.Now.Year.ToString();
@@ -104,6 +105,7 @@
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
+    <script src="~/lib/jqueryui/jquery-ui.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

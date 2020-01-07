@@ -141,6 +141,9 @@
   <data name="Edit" xml:space="preserve">
     <value>Editer</value>
   </data>
+  <data name="Enter your keyword" xml:space="preserve">
+    <value>Entrer votre mot-clé</value>
+  </data>
   <data name="Make" xml:space="preserve">
     <value>Marque</value>
   </data>
@@ -154,10 +157,13 @@
     <value>Modèle</value>
   </data>
   <data name="Models" xml:space="preserve">
-    <value>Les Modèles</value>
+    <value>Les modèles</value>
   </data>
-  <data name="My Rents" xml:space="preserve">
-    <value>Mes Locations</value>
+  <data name="My favorits" xml:space="preserve">
+    <value>Mes favoris</value>
+  </data>
+  <data name="My rents" xml:space="preserve">
+    <value>Mes locations</value>
   </data>
   <data name="Picture" xml:space="preserve">
     <value>Image</value>
