@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ExamProject.Controllers
 {
-    [Authorize(Roles = Roles.Admin)]
+    
     public class EspaceLocataireController : Controller
     {
         private readonly CarsRentalContext _context;
