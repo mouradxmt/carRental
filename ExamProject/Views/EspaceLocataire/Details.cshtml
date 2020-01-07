@@ -6,13 +6,13 @@
     ViewData["Title"] = "Details";
 }
 
-<h2 class="ui center aligned whiteBG" style="margin-bottom:2em">@Html.DisplayFor(model => model.Marque.NomMarque) @Html.DisplayFor(model => model.Model.NomModel)</h2>
+<h2 class="ui center aligned whiteBG" style="width:70%;margin-bottom:2em">@Html.DisplayFor(model => model.Marque.NomMarque) @Html.DisplayFor(model => model.Model.NomModel)</h2>
 
-<div class="ui grid">
+<div class="ui grid center aligned">
 
     <div class="ui eleven wide column whiteBG">
         <div class="image" style="padding-top:10px">
-            <img src="../../@Html.DisplayFor(model => model.ImagePath)" width="100%" style="max-height:500px" />
+            <img src="../../@Html.DisplayFor(model => model.ImagePath)" width="100%" style="max-height:1000px" />
         </div>
         <div class="">
 
@@ -69,6 +69,9 @@
 
     <div class="ui four wide column whiteBG center aligned" style="padding-top:2em">
         <a asp-action="Allouer" asp-route-id="@Model.Id" class="ui tiny teal labeled icon big button center aligned"><i class="ui icon plus"></i>@_localizer["Allouer"]</a>
+        <br />
+        <br />
+        <a asp-action="ajouterFavori" asp-route-id="@Model.Id" class="ui tiny yellow labeled icon button"><i class=" ui icon star"></i>@_localizer["ajouter aux favoris"]</a>
         <hr />
         <h3>Description</h3>
         <div>

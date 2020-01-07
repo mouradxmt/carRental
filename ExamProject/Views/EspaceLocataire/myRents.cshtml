@@ -1,59 +1,54 @@
 ﻿@model IEnumerable<ExamProject.Models.Location>
-
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _localizer
 @{
     ViewData["Title"] = "myRents";
 }
 
-<h2>myRents</h2>
+    <h2>@_localizer["My rents' history"]</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+
 </p>
-<table class="table">
+<table class="ui striped table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Locataire)
+                @_localizer["Car"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Voiture)
+                @_localizer["Start date"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateDebut)
+                @_localizer["End date"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateFin)
+                @_localizer["Total price"]
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrixTotal)
-            </th>
-            <th></th>
+
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Locataire.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Voiture.Annee)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateDebut)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateFin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrixTotal)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.VoitureId"> Voiture: @Html.DisplayFor(modelItem => item.Voiture.Marque.NomMarque) @Html.DisplayFor(modelItem => item.Voiture.Model.NomModel) </a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateDebut)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateFin)
+                </td>
+                <td>
+                    <span class="ui green label">
+                        @Html.DisplayFor(modelItem => item.PrixTotal) MAD
+                    </span>
+                </td>
+
+            </tr>
+        }
     </tbody>
 </table>

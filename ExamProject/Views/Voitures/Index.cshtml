@@ -6,15 +6,15 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Cars listing</h1>
+    <h1>@_localizer["My cars"]</h1>
 <form asp-controller="Voitures" asp-action="Index">
-    <div class="input-group mb-3">
-        
-        <input type="text" id="prix" name="prix" placeholder="Enter a price" aria-describedby="basic-addon1" />
-        <input type="text" id="color" name="color" placeholder="Enter a color" aria-describedby="basic-addon1" />
-        <input type="text" id="Marque" name="Marque" placeholder="Enter a make" aria-describedby="basic-addon1" />
-        <button class="btn btn-outline-primary" type="submit">Search for post</button>
-
+    <div class="ui form">
+        <div class="four fields">
+            <input type="text" id="prix" class="ui field input" name="prix" placeholder="@_localizer["Enter a price"]" aria-describedby="basic-addon1" />
+            <input type="text" id="color" class="ui field input" name="color" placeholder="@_localizer["Enter a color"]" aria-describedby="basic-addon1" />
+            <input type="text" id="Marque" class="ui field input" name="Marque" placeholder="@_localizer["Enter a make"]" aria-describedby="basic-addon1" />
+            <button type="submit" class="ui tiny teal labeled icon button field"><i class=" ui icon search"></i>@_localizer["Search by criteria"]</button>
+</div>
     </div>
 </form>
 <p>
@@ -30,7 +30,7 @@
             <div class="content">
 
                 <div class="header padded">@Html.DisplayFor(modelItem => item.Marque.NomMarque) @Html.DisplayFor(modelItem => item.Model.NomModel)</div>
-                <span class="meta ui green text"> @Html.DisplayFor(modelItem => item.PrixParJour) MAD / Jour</span>
+                <span class="meta ui green text"> @Html.DisplayFor(modelItem => item.PrixParJour) MAD / >@_localizer["Day"]</span>
 
                 <div class="ui grid description">
                     <div class="ui four wide column"><span class="ui sub header">@_localizer["Price Per Day"]: </span></div>

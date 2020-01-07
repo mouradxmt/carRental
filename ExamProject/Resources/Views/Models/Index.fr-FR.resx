@@ -129,10 +129,19 @@
   <data name="Edit" xml:space="preserve">
     <value>Editer</value>
   </data>
+  <data name="Enter your keyword" xml:space="preserve">
+    <value>Entrer votre mot-clé</value>
+  </data>
   <data name="Model Make" xml:space="preserve">
     <value>Marque Du Model</value>
   </data>
   <data name="Model Name" xml:space="preserve">
     <value>Nom Du Model</value>
+  </data>
+  <data name="Models" xml:space="preserve">
+    <value>Models</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Chercher</value>
   </data>
 </root>

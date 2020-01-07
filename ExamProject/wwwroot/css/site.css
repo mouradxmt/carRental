@@ -50,11 +50,11 @@ body {
     width: 100%;
     border-radius: 0.125rem;
     border: none;
-    height: 340px;
+    height: 509px;
 }
 
 .ui.items > .item > .image:not(.ui) {
-    width: 500px;
+    width: 550px;
 }
 
 .ui.items > .item > .content > .header:not(.ui) {
