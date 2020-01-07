@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="All" xml:space="preserve">
+    <value>Tout</value>
+  </data>
+  <data name="Available" xml:space="preserve">
+    <value>Disponible</value>
+  </data>
   <data name="Back to List" xml:space="preserve">
     <value>Retourner à la liste</value>
   </data>
@@ -164,6 +170,9 @@
   </data>
   <data name="My rents" xml:space="preserve">
     <value>Mes locations</value>
+  </data>
+  <data name="Occupied" xml:space="preserve">
+    <value>Occupé</value>
   </data>
   <data name="Picture" xml:space="preserve">
     <value>Image</value>
