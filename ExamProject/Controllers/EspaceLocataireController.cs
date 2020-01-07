@@ -53,9 +53,22 @@ namespace ExamProject.Controllers
         }
 
         
-        public IActionResult Index()
+        public IActionResult Index(int page = 0, int size = 1)
         {
-            espaceLocataireVM.voitures = _context.Voiture.Include(v => v.Marque).Include(v => v.Model).ToList();
+            int position = page * size;
+            espaceLocataireVM.voitures = _context.Voiture.Skip(position).Take(size). Include(v => v.Marque).Include(v => v.Model).ToList();
+            ViewBag.currentPage = page;
+            int totalPages;
+            int nbre = _context.Voiture.ToList().Count;
+            if (nbre % size == 0)
+            {
+                totalPages = nbre / size;
+            }
+            else
+            {
+                totalPages = 1 + nbre / size;
+            }
+            ViewBag.totalPages = totalPages;
             return View(espaceLocataireVM);
         }
 
