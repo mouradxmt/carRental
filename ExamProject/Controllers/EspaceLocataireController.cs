@@ -155,7 +155,7 @@ namespace ExamProject.Controllers
                 car.EstDisponible = false;
             _context.SaveChanges();
                 var locationid = _context.locations.Max(l => l.Id);
-                Demande demande = new Demande() { etat = "envoyé", LocationId = locationid, };
+                Demande demande = new Demande() { etat = "envoyé", LocationId = locationid, voitureid=carid};
                 _context.demande.Add(demande);
                 _context.SaveChanges();
             }

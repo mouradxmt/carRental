@@ -186,7 +186,26 @@ namespace ExamProject.Controllers
 
             return View(voiture);
         }
+        
+         public IActionResult accepter(int? id)
+        {
+            var demande = _context.demande.FirstOrDefault(d => d.Id == id);
+            demande.etat = "demande acceptée";
+            var location = _context.locations.FirstOrDefault(l => l.VoitureId == demande.voitureid);
+            location.statut = "demande rejetée";
+            _context.SaveChanges();
+            return RedirectToAction(nameof(demandes));
+        }
 
+        public IActionResult rejter(int? id)
+        {
+            var demande = _context.demande.FirstOrDefault(d => d.Id == id);
+            demande.etat = "demande rejetée";
+            var location = _context.locations.FirstOrDefault(l => l.VoitureId == demande.voitureid);
+            location.statut = "demande rejetée";
+            _context.SaveChanges();
+            return RedirectToAction(nameof(demandes));
+        }
         // POST: Voitures/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -244,5 +263,27 @@ namespace ExamProject.Controllers
             return LocalRedirect(returnUrl);
         }
 
+        public IActionResult demandes()
+        {
+            var currentUser = _context.applicationUsers.Where(a => a.UserName == User.Identity.Name).First();
+            var cars = _context.Voiture.Where(p => p.ProprietaireId == currentUser.ProprietaireId).ToList();
+
+            List<Demande> Demandes = new List<Demande>();
+
+            foreach(var ele in cars)
+            {
+                var item = _context.demande.FirstOrDefault(d => d.voitureid == ele.Id);
+                if (item != null)
+                {
+
+                
+                item.location = _context.locations.FirstOrDefault(l => l.VoitureId == item.voitureid);
+                Demandes.Add(item);
+                }
+
+            }
+            
+            return View(Demandes);
+        }
     }
 }

@@ -9,6 +9,7 @@ namespace ExamProject.Models
     {
         public int Id { get; set; }
         public int LocationId { get; set; }
+        public int voitureid { get; set; }
         public Location location { get; set; }
         public string etat { get; set; }
 

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ExamProject.Models.Demande>
+
+@{
+    ViewData["Title"] = "demandes";
+}
+
+<h2>demandes</h2>
+
+<p>
+    
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.voitureid)
+            </th>
+            <th>
+                durrée
+            </th>
+            <th>
+                prix totale
+            </th>
+            <th>
+                Etat
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.voitureid)
+            </td>
+            <td>
+                De @item.location.DateFin à @item.location.DateDebut
+            </td>
+            <td>
+                @item.location.PrixTotal
+            </td>
+            <td>
+                @item.etat
+            </td>
+            <td>
+                <a asp-action="accepter" asp-route-id="@item.Id">accepter</a> |
+                <a asp-action="rejter" asp-route-id="@item.Id">rejeter</a> |
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
