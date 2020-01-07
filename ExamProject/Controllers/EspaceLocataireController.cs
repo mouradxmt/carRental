@@ -73,9 +73,9 @@ namespace ExamProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(string color, string Marque, string prix,string keyword="")
+        public IActionResult Index(string color, string Marque, string prix, string disponibilite, string keyword="")
         {
-            if (color != null || Marque != null || prix != null)  /*Contains("")*/
+            if (color != null || Marque != null || prix != null || disponibilite!=null)  /*Contains("")*/
             {
                 if (color == null)
                 {
@@ -89,7 +89,15 @@ namespace ExamProject.Controllers
                 {
                     prix = "";
                 }
-                espaceLocataireVM.voitures = _context.Voiture.Where(p => p.Couleur.Contains(color) && p.Marque.NomMarque.Contains(Marque) && p.PrixParJour.Contains(prix)).ToList();
+                if(disponibilite== "diponible")
+                {
+                    espaceLocataireVM.voitures = _context.Voiture.Include(v => v.Marque).Include(v => v.Model).Where(p => p.Couleur.Contains(color) && p.Marque.NomMarque.Contains(Marque) && p.PrixParJour.Contains(prix) && p.EstDisponible == true).ToList();
+                }
+                else if(disponibilite== "occupe")
+                {
+                    espaceLocataireVM.voitures = _context.Voiture.Include(v => v.Marque).Include(v => v.Model).Where(p => p.Couleur.Contains(color) && p.Marque.NomMarque.Contains(Marque) && p.PrixParJour.Contains(prix) && p.EstDisponible==false).ToList();
+                }else
+                espaceLocataireVM.voitures = _context.Voiture.Include(v => v.Marque).Include(v => v.Model).Where(p => p.Couleur.Contains(color) && p.Marque.NomMarque.Contains(Marque) && p.PrixParJour.Contains(prix)).ToList();
                 //var marquedata = _context.Voiture.Where(A) ;
                 return View(espaceLocataireVM);
             }

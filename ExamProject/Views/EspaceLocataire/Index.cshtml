@@ -13,8 +13,15 @@
                     <input type="text" id="prix" class="ui field input" name="prix" placeholder="@_localizer["Enter a price"]" aria-describedby="basic-addon1" />
                     <input type="text" id="color" class="ui field input" name="color" placeholder="@_localizer["Enter a color"]" aria-describedby="basic-addon1" />
                     <input type="text" id="Marque" class="ui field input" name="Marque" placeholder="@_localizer["Enter a make"]" aria-describedby="basic-addon1" />
-                    <button type="submit" class="ui tiny teal labeled icon button field"><i class=" ui icon search"></i>@_localizer["Search by criteria"]</button>
-                </div>
+
+                    <select class="ui search dropdown" name="disponibilite">
+                        <option value="diponible">disponible</option>
+                        <option value="occupe">occupé</option>
+               
+                        <option value="tous">toutes</option>
+                    </select>
+                        <button type="submit" class="ui tiny teal labeled icon button field"><i class=" ui icon search"></i>@_localizer["Search by criteria"]</button>
+</div>
             </div>
         </form>
         @if (User.IsInRole(Roles.Admin) || User.IsInRole(Roles.Executive))
