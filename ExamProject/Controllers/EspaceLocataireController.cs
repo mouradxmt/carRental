@@ -9,9 +9,11 @@ using ExamProject.Models;
 using ExamProject.Models.viewModel;
 using Microsoft.AspNetCore.Identity;
 using ExamProject.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ExamProject.Controllers
 {
+    [Authorize(Roles = Roles.Admin)]
     public class EspaceLocataireController : Controller
     {
         private readonly CarsRentalContext _context;
@@ -86,7 +88,7 @@ namespace ExamProject.Controllers
                 return View(espaceLocataireVM);
             }
         }
-
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> GetUsers()
         {
             var users = userManager.Users;
@@ -100,6 +102,7 @@ namespace ExamProject.Controllers
             }
             return View(usersList);
         }
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> GetUsers2()
         {
             var users = userManager.Users;
@@ -113,6 +116,7 @@ namespace ExamProject.Controllers
             }
             return View(usersList);
         }
+        [Authorize(Roles = Roles.Admin)]
         // GET: EspaceLocataire/RemoveRoleAsync
         [HttpGet]
         public async Task<IActionResult> RemoveRole(string Id)
@@ -123,6 +127,7 @@ namespace ExamProject.Controllers
             //var users = userManager.Users;
             return View(ApplicationUser);
         }
+        [Authorize(Roles = Roles.Admin)]
         [HttpPost]
         public async Task<IActionResult> RemoveRoleAsync(string Id)
         {
@@ -132,7 +137,7 @@ namespace ExamProject.Controllers
             var users = userManager.Users;
             return RedirectToAction(nameof(GetUsers));
         }
-
+        [Authorize(Roles = Roles.Admin)]
         // GET: EspaceLocataire/RemoveRoleAsync
         [HttpGet]
         public async Task<IActionResult> GiveRole(string Id)
@@ -143,6 +148,7 @@ namespace ExamProject.Controllers
             //var users = userManager.Users;
             return View(ApplicationUser);
         }
+        [Authorize(Roles = Roles.Admin)]
         [HttpPost]
         public async Task<IActionResult> GiveRoleAsync(string Id)
         {
