@@ -1,4 +1,6 @@
 ﻿@using ExamProject.Helpers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _localizer
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,31 +32,32 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">ExamProject</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">CarRental</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">@_localizer["Home"]</a></li>
                     @if (User.IsInRole(Roles.Admin) || User.IsInRole(Roles.Executive))
                     {
-                        <li><a asp-area="" asp-controller="Voitures" asp-action="">Espace Proprietaire</a></li>
-                    
-                    <li><a asp-area="" asp-controller="EspaceLocataire" asp-action="Index">Espace Locataire</a></li>
+                        <li><a asp-area="" asp-controller="Voitures" asp-action="">@_localizer["Owners board"]</a></li>
+
+                        <li><a asp-area="" asp-controller="EspaceLocataire" asp-action="Index">@_localizer["Rental board"]</a></li>
                     }
                     @if (User.IsInRole(Roles.Admin))
                     {
-                        <li><a asp-area="" asp-controller="Models" asp-action="">Models</a></li>
-                        <li><a asp-area="" asp-controller="Marques" asp-action="">Marques</a></li>
+                        <li><a asp-area="" asp-controller="Models" asp-action="">@_localizer["Models"]</a></li>
+                        <li><a asp-area="" asp-controller="Marques" asp-action="">@_localizer["Makes"]</a></li>
+                    }
+                    @if (User.IsInRole(Roles.Admin))
+                    {
+                        <li><a asp-area="" asp-controller="EspaceLocataire" asp-action="GetUsers">@_localizer["Blacklist"]</a></li>
+                        <li><a asp-area="" asp-controller="EspaceLocataire" asp-action="GetUsers2">@_localizer["Users' list"]</a></li>
 }
                     @if (User.IsInRole(Roles.Admin))
                     {
-                        <li><a asp-area="" asp-controller="EspaceLocataire" asp-action="GetUsers">Blacklist</a></li>
-                        <li><a asp-area="" asp-controller="EspaceLocataire" asp-action="GetUsers2">List of users</a></li>}
-                        @if (User.IsInRole(Roles.Admin))
-                        {
-                            <li class="nav-item"><a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Add User</a></li>
-                        }
-                    </ul>
+                        <li class="nav-item"><a class="nav-link" asp-area="Identity" asp-page="/Account/Register">@_localizer["Add user"]</a></li>
+                    }
+                </ul>
 
                 <partial name="_LoginPartial" />
             </div>
@@ -84,7 +87,7 @@
         }
         <div class="ui grid center aligned">
             <div class="ui column six wide">
-                <p>&copy; @year - ExamProject</p>
+                <p>&copy; @year - CarRental</p>
             </div>
             <div class="ui column six wide">
                 @await Html.PartialAsync("_SelectLanguagePartial")
