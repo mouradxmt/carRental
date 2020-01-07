@@ -23,6 +23,7 @@ namespace ExamProject.Models
         public DbSet<Locataire> locataires { get; set; }
         public DbSet<Location> locations { get; set; }
         public DbSet<Favori> favoris { get; set; }
+        public DbSet<Demande> demande { get; set; }
 
     }
 }

@@ -53,13 +53,33 @@ namespace ExamProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(string keyword="")
+        public IActionResult Index(string color, string Marque, string prix,string keyword="")
         {
-            if (String.IsNullOrEmpty(keyword)) return Index();
-            espaceLocataireVM.voitures = _context.Voiture.Include(v => v.Marque).Include(v => v.Model).Where(v=>v.Marque.NomMarque.Contains(keyword) || v.Model.NomModel.Contains(keyword)).ToList();
-            ViewBag.keyword = keyword;
-            return View(espaceLocataireVM);
-
+            if (color != null || Marque != null || prix != null)  /*Contains("")*/
+            {
+                if (color == null)
+                {
+                    color = "";
+                }
+                if (Marque == null)
+                {
+                    Marque = "";
+                }
+                if (prix == null)
+                {
+                    prix = "";
+                }
+                espaceLocataireVM.voitures = _context.Voiture.Where(p => p.Couleur.Contains(color) && p.Marque.NomMarque.Contains(Marque) && p.PrixParJour.Contains(prix)).ToList();
+                //var marquedata = _context.Voiture.Where(A) ;
+                return View(espaceLocataireVM);
+            }
+            else
+            {
+                if (String.IsNullOrEmpty(keyword)) return Index();
+                espaceLocataireVM.voitures = _context.Voiture.Include(v => v.Marque).Include(v => v.Model).Where(v => v.Marque.NomMarque.Contains(keyword) || v.Model.NomModel.Contains(keyword)).ToList();
+                ViewBag.keyword = keyword;
+                return View(espaceLocataireVM);
+            }
         }
 
 
@@ -125,12 +145,19 @@ namespace ExamProject.Controllers
                 DateFin =endd,
                 LocataireId =user.LocataireId,
                 PrixTotal=(endd-startd).TotalDays * Convert.ToDouble(car.PrixParJour),
-                VoitureId =carid
+                VoitureId =carid,
+                statut="demande envoyé"
                 
             };
+               
+
             _context.locations.Add(location);
                 car.EstDisponible = false;
             _context.SaveChanges();
+                var locationid = _context.locations.Max(l => l.Id);
+                Demande demande = new Demande() { etat = "envoyé", LocationId = locationid, };
+                _context.demande.Add(demande);
+                _context.SaveChanges();
             }
 
             return this.Redirect("/EspaceLocataire");

@@ -4,14 +4,16 @@ using ExamProject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ExamProject.Migrations
 {
     [DbContext(typeof(CarsRentalContext))]
-    partial class CarsRentalContextModelSnapshot : ModelSnapshot
+    [Migration("20200106232642_locationStatus2")]
+    partial class locationStatus2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,7 +94,7 @@ namespace ExamProject.Migrations
 
                     b.Property<int>("LocationId");
 
-                    b.Property<string>("etat");
+                    b.Property<bool>("etat");
 
                     b.HasKey("Id");
 

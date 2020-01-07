@@ -13,10 +13,10 @@ namespace ExamProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class VoitureApiController : ControllerBase
+    public class EspaceLocataireApiController : ControllerBase
     {
         private readonly CarsRentalContext db;
-        public VoitureApiController(CarsRentalContext _db)
+        public EspaceLocataireApiController(CarsRentalContext _db)
         {
             db = _db;
         }
@@ -27,7 +27,7 @@ namespace ExamProject.Controllers
         {
             try
             {
-                string term =HttpContext.Request.Query["term"].ToString();
+                string term = HttpContext.Request.Query["term"].ToString();
                 var annees = db.Voiture.Include(m => m.Marque).Include(m => m.Model).Where(p => p.Annee.Contains(term))
                     .Select(p => p.Annee).ToList();
                 return Ok(annees);
@@ -70,23 +70,22 @@ namespace ExamProject.Controllers
         //        return BadRequest();
         //    }
         //}
-        [Authorize(Roles = Roles.Admin + "," + Roles.Executive)]
-        [Produces("application/json")]
-        [HttpGet("searchml")]
-        public async Task<IActionResult> Searchml()
-        {
-            try
-            {
-                string term = HttpContext.Request.Query["term"].ToString();
-                var model = db.Models.Include(m => m.Marque).Where(p => p.NomModel.Contains(term) || p.Marque.NomMarque.Contains(term))
-                    .Select(p => p.NomModel).ToList();
-                return Ok(model);
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }
+        //[Produces("application/json")]
+        //[HttpGet("searchml")]
+        //public IActionResult Searchml()
+        //{
+        //    try
+        //    {
+        //        string term = HttpContext.Request.Query["term"].ToString();
+        //        var model = db.Models.Include(m => m.Marque).Where(p => p.NomModel.Contains(term) || p.Marque.NomMarque.Contains(term))
+        //            .Select(p => p.NomModel).ToList();
+        //        return Ok(model);
+        //    }
+        //    catch
+        //    {
+        //        return BadRequest();
+        //    }
+        //}
         [Authorize(Roles = Roles.Admin + "," + Roles.Executive)]
         [Produces("application/json")]
         [HttpGet("searchp")]
