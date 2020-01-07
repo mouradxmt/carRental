@@ -84,13 +84,15 @@
                     </div>
                     <span asp-validation-for="Input.ConfirmPassword"></span>
                 </div>
-                <div class="ui message">
-                    <div class="form-group">
-                        <label asp-for="Input.IsAdmin"></label>
-                        <input asp-for="Input.IsAdmin" class="form-control" />
+                @if(User.IsInRole(Roles.Admin)) { 
+                    <div class="ui message">
+                        <div class="form-group">
+                            <label asp-for="Input.IsAdmin"></label>
+                            <input asp-for="Input.IsAdmin" class="form-control" />
+                        </div>
                     </div>
-                </div>
-                <button type="submit" class="btn btn-default ui fluid large red submit button">Creer un compte</button>
+                  }
+                <button type="submit" class="btn btn-default ui fluid large red submit button">Créer un compte</button>
 
             </div>
 
