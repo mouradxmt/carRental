@@ -35,12 +35,11 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    <li><a asp-area="" asp-controller="Voitures" asp-action="">Voitures</a></li>
+
+                    <li><a asp-area="" asp-controller="Voitures" asp-action="">Espace Proprietaire</a></li>
+                    <li><a asp-area="" asp-controller="EspaceLocataire" asp-action="Index">Espace Locataire</a></li>
                     <li><a asp-area="" asp-controller="Models" asp-action="">Models</a></li>
                     <li><a asp-area="" asp-controller="Marques" asp-action="">Marques</a></li>
-                    <li><a asp-area="" asp-controller="EspaceLocataire" asp-action="Index">Espace Locataire</a></li>
                     @if (User.IsInRole(Roles.Admin))
                     {
                         <li class="nav-item"><a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Add User</a></li>
