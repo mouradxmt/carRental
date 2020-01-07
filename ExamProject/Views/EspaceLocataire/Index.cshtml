@@ -94,20 +94,19 @@
                 </div>
             }
         </div>
-        @{
-            for (int i = 0; i < ViewBag.totalPages; i++)
-            {
-                string className = "";
-                if (i == ViewBag.currentPage)
-                {
-                    className = "active";
+            <div class="ui pagination menu">
+                @{
+                    for (int i = 0; i < ViewBag.totalPages; i++)
+                    {
+                        string className = "item";
+                        if (i == ViewBag.currentPage)
+                        {
+                            className = "active item";
+                        }
+                        <a class="@className" asp-action="Index" asp-route-page="@i" asp-route-motCle="@ViewBag.motCle">@(i + 1)</a>
+                    }
                 }
+            </div>
+            <div class="clear"></div>
 
-                <li class="@className">
-                    <a asp-action="Index" asp-route-page="@i" asp-route-motCle="@ViewBag.motCle">@i</a>
-                </li>
-            }
-        }
-        <div class="clear"></div>
-
-    </div>
+        </div>
