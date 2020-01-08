@@ -281,7 +281,7 @@ namespace ExamProject.Controllers
                 if (item != null)
                 {
 
-                
+                    item.voiture = ele;
                 item.location = _context.locations.FirstOrDefault(l => l.VoitureId == item.voitureid);
                 Demandes.Add(item);
                 }
