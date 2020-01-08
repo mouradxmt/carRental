@@ -24,7 +24,7 @@
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+        <div style="width:90%">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -68,7 +68,7 @@
 
     <partial name="_CookieConsentPartial" />
 
-    <div style="width:95%;margin:auto;margin-top:6em;">
+    <div style="width:95%;margin:auto;margin-top:4em;">
         @if ((User.IsInRole(Roles.Admin) || User.IsInRole(Roles.Executive)) && this.ViewContext.RouteData.Values["controller"] != null || this.ViewContext.RouteData.Values["action"] != null )
         {
             <div class="ui breadcrumb">
