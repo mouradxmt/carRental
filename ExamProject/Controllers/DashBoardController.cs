@@ -28,7 +28,7 @@ namespace ExamProject.Controllers
             chartMarqueNumber item;
             foreach(var ele in marque)
             {
-                var count = _context.Marques.Where(m => m.NomMarque == ele.NomMarque).Count();
+                var count = _context.Voiture.Include(m => m.Marque).Include(m => m.Model).Where(m => m.Marque.NomMarque == ele.NomMarque).Count();
                 item = new chartMarqueNumber() { nomMarque = ele.NomMarque, count= count };
                 listMarque.Add(item);
             }
