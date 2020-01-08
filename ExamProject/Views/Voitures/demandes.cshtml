@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<ExamProject.Models.Demande>
-
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _localizer
 @{
     ViewData["Title"] = "demandes";
 }
@@ -7,47 +8,48 @@
 <h2>demandes</h2>
 
 <p>
-    
+
 </p>
-<table class="table">
+<table class="ui striped table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.voitureid)
             </th>
             <th>
-                durrée
+                @_localizer["Duration"]
             </th>
             <th>
-                prix totale
+                @_localizer["Total price"]
             </th>
             <th>
-                Etat
+                @_localizer["state"]
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.voitureid)
-            </td>
-            <td>
-                De @item.location.DateFin à @item.location.DateDebut
-            </td>
-            <td>
-                @item.location.PrixTotal
-            </td>
-            <td>
-                @item.etat
-            </td>
-            <td>
-                <a asp-action="accepter" asp-route-id="@item.Id">accepter</a> |
-                <a asp-action="rejter" asp-route-id="@item.Id">rejeter</a> |
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.voiture.Id">  @item.voiture.Marque.NomMarque  @item.voiture.Model.NomModel </a>
+                </td>
+                <td>
+                    De @item.location.DateFin à @item.location.DateDebut
+                </td>
+                <td>
+                    @item.location.PrixTotal
+                </td>
+                <td>
+                    @item.etat
+                </td>
+                <td>
+                    <a class="ui green button" asp-action="accepter" asp-route-id="@item.Id">accepter</a> 
+                    <a class="ui red button" asp-action="rejter" asp-route-id="@item.Id">rejeter</a> 
 
-            </td>
-        </tr>
-}
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -5,8 +5,8 @@
     ViewData["Title"] = "The Blacklist";
 }
 
-<h2>All Users</h2>
-<table class="table">
+    <h2>@_localizer["blacklist"]</h2>
+<table class="ui table striped">
     <thead>
         <tr>
             <th>
@@ -42,7 +42,7 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                <a asp-action="GiveRole" asp-route-id="@item.Id" class="ui tiny labeled icon button green"><i class=" ui icon warning"></i>@_localizer["Add To List"]</a>
+                <a asp-action="GiveRole" asp-route-id="@item.Id" class="ui tiny labeled icon button green"><i class=" ui icon warning"></i>@_localizer["Remove from blacklist"]</a>
             </td>
         </tr>
         }

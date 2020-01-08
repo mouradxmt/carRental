@@ -53,7 +53,7 @@ namespace ExamProject.Controllers
         }
 
         
-        public IActionResult Index(int page = 0, int size = 1)
+        public IActionResult Index(int page = 0, int size = 2)
         {
             int position = page * size;
             espaceLocataireVM.voitures = _context.Voiture.Skip(position).Take(size). Include(v => v.Marque).Include(v => v.Model).ToList();
@@ -312,7 +312,17 @@ namespace ExamProject.Controllers
         {
             var user = _context.applicationUsers.Where(ap => ap.UserName == User.Identity.Name).First();
            var location= _context.locations.Where(lo => lo.LocataireId == user.LocataireId).ToList();
-
+            foreach(var l in location)
+            {
+                l.Voiture = _context.Voiture.Include(v => v.Marque).Include(v => v.Model).FirstOrDefault(v => v.Id ==l.VoitureId);
+                var de=_context.demande.FirstOrDefault(d=>d.LocationId==l.Id);
+                if (de != null)
+                {
+                    l.statut = de.etat;
+                }
+                
+            }
+            _context.SaveChanges();
             return View(location);
         }
 

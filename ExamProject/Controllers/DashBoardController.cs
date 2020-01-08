@@ -28,7 +28,7 @@ namespace ExamProject.Controllers
             chartMarqueNumber item;
             foreach(var ele in marque)
             {
-                var count = _context.Marques.Where(m => m.NomMarque == ele.NomMarque).Count();
+                var count = _context.Voiture.Include(m => m.Marque).Include(m => m.Model).Where(m => m.Marque.NomMarque == ele.NomMarque).Count();
                 item = new chartMarqueNumber() { nomMarque = ele.NomMarque, count= count };
                 listMarque.Add(item);
             }
@@ -42,10 +42,11 @@ namespace ExamProject.Controllers
             List<CarsDemand> listMarque = new List<CarsDemand>();
             var voitures = _context.Voiture.Include(m => m.Marque).Include(m => m.Model).ToList();
             CarsDemand item;
+            var count=0;
             foreach (var ele in voitures)
             {
 
-                var count = _context.locations.Where(m => m.VoitureId==ele.Id).Count();
+                count = _context.locations.Where(m => m.VoitureId==ele.Id).Count() + count;
                 item = new CarsDemand() {nomVoiture=ele.Marque.NomMarque+" "+ele.Model.NomModel,countLocation=count  };
 
                 listMarque.Add(item);

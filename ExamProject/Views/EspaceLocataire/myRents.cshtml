@@ -25,30 +25,36 @@
             <th>
                 @_localizer["Total price"]
             </th>
+            <th>
+                @_localizer["state"]
+            </th>
 
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+        <tr>
 
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.VoitureId"> Voiture: @Html.DisplayFor(modelItem => item.Voiture.Marque.NomMarque) @Html.DisplayFor(modelItem => item.Voiture.Model.NomModel) </a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateDebut)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateFin)
-                </td>
-                <td>
-                    <span class="ui green label">
-                        @Html.DisplayFor(modelItem => item.PrixTotal) MAD
-                    </span>
-                </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.VoitureId">  @item.Voiture.Marque.NomMarque  @item.Voiture.Model.NomModel </a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateDebut)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateFin)
+            </td>
+            <td>
+                <span class="ui green label">
+                    @Html.DisplayFor(modelItem => item.PrixTotal) MAD
+                </span>
+            </td>
+            <td>
+                @item.statut
+            </td>
 
-            </tr>
+        </tr>
         }
     </tbody>
 </table>
