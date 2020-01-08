@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Localization;
 
 namespace ExamProject.Controllers
 {
-    [Authorize(Roles = Roles.Admin)]
+    
     public class ModelsController : Controller
     {
         private readonly IStringLocalizer<ModelsController> _localizer;
@@ -34,7 +34,7 @@ namespace ExamProject.Controllers
             };
         }
 
-        // GET: Models
+        [Authorize(Roles = Roles.Admin)]
         public IActionResult Index(string models)
         {
             if (models != null)
@@ -49,7 +49,7 @@ namespace ExamProject.Controllers
             }
         }
 
-        // GET: Models/Details/5
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -66,12 +66,15 @@ namespace ExamProject.Controllers
 
             return View(model);
         }
+
+        [Authorize(Roles = Roles.Admin)]
         public List<Marque> FillSelectList()
         {
             var makes = _context.Marques.ToList();
             makes.Insert(0, new Marque { Id = -1, NomMarque = _localizer["--- Please select a Make--"] });
             return makes;
         }
+        [Authorize(Roles = Roles.Admin)]
         ModelVM GetAllMakes()
         {
             var vmodel = new ModelVM
@@ -80,7 +83,7 @@ namespace ExamProject.Controllers
             };
             return vmodel;
         }
-        // GET: Models/Create
+        [Authorize(Roles = Roles.Admin)]
         public IActionResult Create()
         {
             return View(GetAllMakes());
@@ -91,6 +94,7 @@ namespace ExamProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = Roles.Admin)]
         public IActionResult Create(IFormCollection collection)
         {
             if (!ModelState.IsValid)
@@ -102,7 +106,7 @@ namespace ExamProject.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Models/Edit/5
+        [Authorize(Roles = Roles.Admin)]
         public IActionResult Edit(int id)
         {
             VM.Model = _context.Models.Include(m => m.Marque).SingleOrDefault(m => m.Id == id);
@@ -116,7 +120,7 @@ namespace ExamProject.Controllers
 
         // POST: Models/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = Roles.Admin)]
         [HttpPost]
         public IActionResult Edit()
         {
@@ -129,7 +133,7 @@ namespace ExamProject.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Models/Delete/5
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -147,7 +151,7 @@ namespace ExamProject.Controllers
             return View(model);
         }
 
-        // POST: Models/Delete/5
+        [Authorize(Roles = Roles.Admin)]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)

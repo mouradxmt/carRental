@@ -312,7 +312,17 @@ namespace ExamProject.Controllers
         {
             var user = _context.applicationUsers.Where(ap => ap.UserName == User.Identity.Name).First();
            var location= _context.locations.Where(lo => lo.LocataireId == user.LocataireId).ToList();
-
+            foreach(var l in location)
+            {
+                l.Voiture = _context.Voiture.Include(v => v.Marque).Include(v => v.Model).FirstOrDefault(v => v.Id ==l.VoitureId);
+                var de=_context.demande.FirstOrDefault(d=>d.LocationId==l.Id);
+                if (de != null)
+                {
+                    l.statut = de.etat;
+                }
+                
+            }
+            _context.SaveChanges();
             return View(location);
         }
 

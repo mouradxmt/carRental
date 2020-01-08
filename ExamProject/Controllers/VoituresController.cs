@@ -131,6 +131,7 @@ namespace ExamProject.Controllers
             VM.Voiture.ProprietaireId =  currentUser.ProprietaireId ;
             VM.Voiture.EstDisponible = true;
             _context.Voiture.Add(VM.Voiture);
+            _context.SaveChanges();
             int CarID = _context.Voiture.Max(v => v.Id);
             UploadImage(CarID);
             _context.SaveChanges();
