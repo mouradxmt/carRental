@@ -53,7 +53,7 @@ namespace ExamProject.Controllers
         }
 
         
-        public IActionResult Index(int page = 0, int size = 1)
+        public IActionResult Index(int page = 0, int size = 2)
         {
             int position = page * size;
             espaceLocataireVM.voitures = _context.Voiture.Skip(position).Take(size). Include(v => v.Marque).Include(v => v.Model).ToList();
