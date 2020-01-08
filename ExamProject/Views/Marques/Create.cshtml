@@ -10,8 +10,8 @@
 <h4>@_localizer["Make"]</h4>
 <hr />
 
-<div class="row">
-    <div class="col-md-4">
+<div style="width:60%;margin:auto">
+    <div class="ui center aligned">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -20,7 +20,7 @@
                 <span asp-validation-for="NomMarque" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value=@_localizer["Create"]  class="ui green button icon add" />
+                <input type="submit" value=@_localizer["Create"] class="ui green button icon add" />
             </div>
         </form>
     </div>
