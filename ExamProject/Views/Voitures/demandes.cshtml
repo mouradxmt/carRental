@@ -45,8 +45,8 @@
                     @item.etat
                 </td>
                 <td>
-                    <a asp-action="accepter" asp-route-id="@item.Id">accepter</a> |
-                    <a asp-action="rejter" asp-route-id="@item.Id">rejeter</a> |
+                    <a class="ui green button" asp-action="accepter" asp-route-id="@item.Id">accepter</a> 
+                    <a class="ui red button" asp-action="rejter" asp-route-id="@item.Id">rejeter</a> 
 
                 </td>
             </tr>
