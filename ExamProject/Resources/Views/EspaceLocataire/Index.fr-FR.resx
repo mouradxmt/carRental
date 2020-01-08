@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add to favorites" xml:space="preserve">
+    <value>ajouter aux favoris</value>
+  </data>
   <data name="All" xml:space="preserve">
     <value>Tout</value>
+  </data>
+  <data name="Allocate" xml:space="preserve">
+    <value>Allouer</value>
   </data>
   <data name="Available" xml:space="preserve">
     <value>Disponible</value>
@@ -138,6 +144,9 @@
   <data name="Create New" xml:space="preserve">
     <value>Créer Nouveau</value>
   </data>
+  <data name="Day" xml:space="preserve">
+    <value>Jour</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Supprimer</value>
   </data>
@@ -146,6 +155,15 @@
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Editer</value>
+  </data>
+  <data name="Enter a color" xml:space="preserve">
+    <value>Entrer une couleur</value>
+  </data>
+  <data name="Enter a make" xml:space="preserve">
+    <value>Entrer une marque</value>
+  </data>
+  <data name="Enter a price" xml:space="preserve">
+    <value>Entrer un prix</value>
   </data>
   <data name="Enter your keyword" xml:space="preserve">
     <value>Entrer votre mot-clé</value>
@@ -179,6 +197,9 @@
   </data>
   <data name="Price Per Day" xml:space="preserve">
     <value>Prix Par Jour</value>
+  </data>
+  <data name="Search by criteria" xml:space="preserve">
+    <value>Chercher par critère</value>
   </data>
   <data name="Year" xml:space="preserve">
     <value>Année</value>

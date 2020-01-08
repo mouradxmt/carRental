@@ -29,7 +29,7 @@
     <div class="column">
         <h2 class="ui red image header">
             <span class="content">
-                Log-in to your account
+                @_localizer["Login"]
             </span>
         </h2>
         <form method="post" class="ui large form">
@@ -57,7 +57,7 @@
 
 
                 </div>
-                <button type="submit" class="btn btn-default ui fluid large red submit button">Log in</button>
+                <button type="submit" class="btn btn-default ui fluid large red submit button">@_localizer["Login"]</button>
 
             </div>
 
@@ -66,8 +66,8 @@
         </form>
 
         <div class="ui message">
-            <a asp-page="./ForgotPassword">Vous avez oublier votre mot de passe?</a><br />
-            Vous n'avez pas de compte? <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Creer un compte.</a>
+            <a asp-page="./ForgotPassword">@_localizer["Forgot Password?"]</a><br />
+            @_localizer["You d'ont have account?"]<a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">@_localizer["Register"]</a>
         </div>
     </div>
 </div>

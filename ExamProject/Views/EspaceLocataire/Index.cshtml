@@ -48,7 +48,7 @@
                     <div class="content">
 
                         <div class="header padded">@Html.DisplayFor(modelItem => item.Marque.NomMarque) @Html.DisplayFor(modelItem => item.Model.NomModel)</div>
-                        <span class="meta ui green text"> @Html.DisplayFor(modelItem => item.PrixParJour) MAD / Jour</span>
+                        <span class="meta ui green text"> @Html.DisplayFor(modelItem => item.PrixParJour) MAD / @_localizer["Day"]</span>
 
                         <div class="ui grid description">
                             <div class="ui four wide column"><span class="ui sub header">@_localizer["Price Per Day"]: </span></div>
@@ -94,8 +94,8 @@
                             <a asp-action="Details" asp-route-id="@item.Id" class="ui tiny blue labeled icon button"><i class=" ui icon info"></i>@_localizer["Details"]</a>
                             @if (User.IsInRole(Roles.Admin) || User.IsInRole(Roles.Executive))
                             {
-                                <a asp-action="Allouer" asp-route-id="@item.Id" class="ui tiny teal labeled icon button"><i class=" ui icon plus"></i>@_localizer["Allouer"]</a>
-                                <a asp-action="ajouterFavori" asp-route-id="@item.Id" class="ui tiny yellow labeled icon button"><i class=" ui icon star"></i>@_localizer["ajouter aux favoris"]</a>}
+                                <a asp-action="Allouer" asp-route-id="@item.Id" class="ui tiny teal labeled icon button"><i class=" ui icon plus"></i>@_localizer["Allocate"]</a>
+                                <a asp-action="ajouterFavori" asp-route-id="@item.Id" class="ui tiny yellow labeled icon button"><i class=" ui icon star"></i>@_localizer["Add to favorites"]</a>}
                         </span>
                     </div>
                 </div>

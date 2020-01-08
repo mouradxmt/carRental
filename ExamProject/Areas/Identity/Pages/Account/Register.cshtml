@@ -1,6 +1,8 @@
 ﻿@page
 @model RegisterModel
 @using ExamProject.Helpers
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _localizer
 @{
     ViewData["Title"] = "Register";
 }
@@ -28,7 +30,7 @@
     <div class="column">
         <h2 class="ui red image header">
             <span class="content">
-                Creer votre compte
+                @_localizer["Creer votre compte"]
             </span>
         </h2>
         <form method="post" class="ui large form">
@@ -38,64 +40,64 @@
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="user icon"></i>
-                        <input asp-for="Input.Nom" class="form-control" placeholder="Username/Nom" />
+                        <input asp-for="Input.Nom" class="form-control" placeholder="@_localizer["Nom"]" />
                     </div>
                     <span asp-validation-for="Input.Nom"></span>
                 </div>
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="user icon"></i>
-                        <input asp-for="Input.Prenom" class="form-control" placeholder="Prenom" />
+                        <input asp-for="Input.Prenom" class="form-control" placeholder="@_localizer["Prenom"]" />
                     </div>
                     <span asp-validation-for="Input.Prenom"></span>
                 </div>
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="phone icon"></i>
-                        <input asp-for="Input.Tele" class="form-control" placeholder="Numero de telephone" />
+                        <input asp-for="Input.Tele" class="form-control" placeholder="@_localizer["Numero de telephone"]" />
                     </div>
                     <span asp-validation-for="Input.Tele"></span>
                 </div>
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="address book outline icon"></i>
-                        <input asp-for="Input.Ville" class="form-control" placeholder="Ville" />
+                        <input asp-for="Input.Ville" class="form-control" placeholder="@_localizer["Ville"]" />
                     </div>
                     <span asp-validation-for="Input.Ville"></span>
                 </div>
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="envelope icon"></i>
-                        <input asp-for="Input.Email" class="form-control" placeholder="Adresse e-mail" />
+                        <input asp-for="Input.Email" class="form-control" placeholder="@_localizer["Adresse e-mail"]" />
                     </div>
                     <span asp-validation-for="Input.Email"></span>
                 </div>
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="lock icon"></i>
-                        <input asp-for="Input.Password" class="form-control" placeholder="Mot de passe" />
+                        <input asp-for="Input.Password" class="form-control" placeholder="@_localizer["Mot de passe"]" />
                     </div>
                     <span asp-validation-for="Input.Password"></span>
                 </div>
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="lock icon"></i>
-                        <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="Confirmer mot de passe" />
+                        <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="@_localizer["Confirmer mot de passe"]" />
                     </div>
                     <span asp-validation-for="Input.ConfirmPassword"></span>
                 </div>
-                
+
                 <div class="field">
-                    <select  id="selectagence" class="ui dropdown" onchange="showAgencyName(this.value)">
-                        <option value="false">particulier</option>
-                        <option value="true">agence</option>
+                    <select id="selectagence" class="ui dropdown" onchange="showAgencyName(this.value)">
+                        <option value="false">@_localizer["Particulier"]</option>
+                        <option value="true">@_localizer["Agence"]</option>
 
                     </select>
                 </div>
                 <div class="field" id="agenceName" style="display:none">
                     <div class="ui left icon input">
                         <i class="lock icon"></i>
-                        <input asp-for="Input.agencename" class="form-control" placeholder="nom de l'agence" />
+                        <input asp-for="Input.agencename" class="form-control" placeholder="@_localizer["Nom de l'agence"]" />
                     </div>
                     <span asp-validation-for="Input.agencename"></span>
                 </div>
@@ -108,7 +110,7 @@
 
                     </div>
                 }
-                <button type="submit" class="btn btn-default ui fluid large red submit button">Créer un compte</button>
+                <button type="submit" class="btn btn-default ui fluid large red submit button">@_localizer["Créer un compte"]</button>
 
             </div>
 
@@ -118,25 +120,25 @@
 
 
         @*@if (User.IsInRole(Roles.Admin))
-        {*@
+            {*@
 
-    @*}*@
-            
-        </div>
+        @*}*@
+
+    </div>
 </div>
 <script>
-    
+
     function showAgencyName(isAgency) {
-        
+
         if (isAgency == 'true') {
             document.querySelector('#agenceName').style.display = 'block';
 
         } else {
-            document.querySelector('#agenceName').style.display = 'none';  
+            document.querySelector('#agenceName').style.display = 'none';
         }
     }
 
-    
+
 
 
 </script>

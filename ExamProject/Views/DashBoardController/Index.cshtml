@@ -1,4 +1,5 @@
-﻿
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _localizer
 @{
     ViewData["Title"] = "Index";
 }
@@ -7,15 +8,15 @@
 
     <div class="content">
         <div id="chart_div"></div>
-        
+
     </div>
 </div>
 
 <div class="ui item" style="background:white;border:1px solid #ccc;margin:1.5em;">
 
-<div class="content">
-    <div id="chartvoiture"></div>
-</div>
+    <div class="content">
+        <div id="chartvoiture"></div>
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -46,14 +47,14 @@
 
     function marqueChart(data) {
         var dataArray = [
-            ['Marque', 'nombre des voitures']
+            [@_localizer["Marque"], @_localizer["nombre des voitures"]]
         ];
         $.each(data, function (i, item) {
             dataArray.push([item.nomMarque, item.count]);
         });
         var data = google.visualization.arrayToDataTable(dataArray);
         var options = {
-            title: 'les marques les plus presentes dans la plateforme',
+            title: @_localizer["Les marques les plus presentes dans la plateforme"],
             chartArea: {
                 width: '50%'
             },
@@ -63,7 +64,7 @@
                 minValue: 0
             },
             vAxis: {
-                title: ' nombre de voiture'
+                title: _localizer["nombre de voiture"]
             }
         };
         var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
@@ -73,13 +74,13 @@
     }
 
 
-    
-</script>  
+
+</script>
 
 <script>
     /// voiture chart
 
-     google.charts.load('current', {
+    google.charts.load('current', {
         packages: ['corechart', 'bar']
     });
     google.charts.setOnLoadCallback(LoadDatapie);
@@ -104,24 +105,24 @@
 
     function voitureChart(data) {
         var dataArray = [
-            ['la voiture', 'nombre de fois']
+            [@_localizer["La voiture"], @_localizer["Nombre de fois"]]
         ];
         $.each(data, function (i, item) {
             dataArray.push([item.nomVoiture, item.countLocation]);
         });
         var data = google.visualization.arrayToDataTable(dataArray);
         var options = {
-            title: 'les voitures les plus demandées',
+            title: @_localizer["les voitures les plus demandées"],
             chartArea: {
                 width: '50%'
             },
             colors: ['#b0120a', '#7b1fa2', '#ffab91', '#d95f02'],
             hAxis: {
-                title: 'nom voiture',
+                title: @_localizer["Nom voiture"],
                 minValue: 0
             },
             vAxis: {
-                title: ' nombre de fois'
+                title: @_localizer["Nombre de fois"]
             }
         };
         var chart = new google.visualization.PieChart(document.getElementById('chartvoiture'));

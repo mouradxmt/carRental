@@ -50,7 +50,7 @@ namespace ExamProject
                 //new CultureInfo("fr"),
             };
 
-            opts.DefaultRequestCulture = new RequestCulture("en-US");
+           // opts.DefaultRequestCulture = new RequestCulture("en-US");
             // Formatting numbers, dates, etc.
             opts.SupportedCultures = supportedCultures;
             // UI strings that we have localized.
