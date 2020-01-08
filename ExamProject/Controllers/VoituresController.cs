@@ -131,7 +131,8 @@ namespace ExamProject.Controllers
             VM.Voiture.ProprietaireId =  currentUser.ProprietaireId ;
             VM.Voiture.EstDisponible = true;
             _context.Voiture.Add(VM.Voiture);
-            UploadImage();
+            int CarID = _context.Voiture.Max(v => v.Id);
+            UploadImage(CarID);
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
@@ -163,8 +164,11 @@ namespace ExamProject.Controllers
                 ViewBag.Message = "Please select a Model from the list";
                 return View(VM);
             }
+            var currentUser = _context.applicationUsers.Where(a => a.UserName == User.Identity.Name).First();
+            VM.Voiture.ProprietaireId = currentUser.ProprietaireId;
             _context.Voiture.Update(VM.Voiture);
-            UploadImage();
+            UploadImage(VM.Voiture.Id);
+
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
@@ -223,10 +227,10 @@ namespace ExamProject.Controllers
         }
 
 
-        private void UploadImage()
+        private void UploadImage(int CarID)
         {
 
-            var CarID = VM.Voiture.Id;
+            
 
             //Get wwwroot path to save the file on server 
             string wwwrootPath = _hostingEnvironment.WebRootPath;
