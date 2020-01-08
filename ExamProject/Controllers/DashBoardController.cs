@@ -46,7 +46,7 @@ namespace ExamProject.Controllers
             foreach (var ele in voitures)
             {
 
-                count = _context.locations.Where(m => m.VoitureId==ele.Id).Count() + count;
+                count = _context.locations.Where(m => m.VoitureId==ele.Id).Count() ;
                 item = new CarsDemand() {nomVoiture=ele.Marque.NomMarque+" "+ele.Model.NomModel,countLocation=count  };
 
                 listMarque.Add(item);

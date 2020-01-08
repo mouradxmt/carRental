@@ -73,6 +73,7 @@ namespace ExamProject.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+            public string agencename { get; set; }
             public bool IsAdmin { get; set; }
         }
 
@@ -87,7 +88,13 @@ namespace ExamProject.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 // creating an owner 
-                var proprietaire = new Proprietaire() { IsAgence = false };
+
+                var proprietaire = new Proprietaire() { IsAgence = false, };
+                if (Input.agencename != null)
+                {
+                    proprietaire.IsAgence = true;
+                    proprietaire.NomAgence = Input.agencename;
+                }
                 var locataire = new Locataire() { };
                 _context.locataires.Add(locataire);
                 _context.proprietaires.Add(proprietaire);

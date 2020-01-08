@@ -84,14 +84,30 @@
                     </div>
                     <span asp-validation-for="Input.ConfirmPassword"></span>
                 </div>
-                @if(User.IsInRole(Roles.Admin)) { 
-                    <div class="ui message">
-                        <div class="form-group">
-                            <label asp-for="Input.IsAdmin"></label>
-                            <input asp-for="Input.IsAdmin" class="form-control" />
-                        </div>
+                
+                <div class="field">
+                    <select  id="selectagence" class="ui dropdown" onchange="showAgencyName(this.value)">
+                        <option value="false">particulier</option>
+                        <option value="true">agence</option>
+
+                    </select>
+                </div>
+                <div class="field" id="agenceName" style="display:none">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input asp-for="Input.agencename" class="form-control" placeholder="nom de l'agence" />
                     </div>
-                  }
+                    <span asp-validation-for="Input.agencename"></span>
+                </div>
+                @if (User.IsInRole(Roles.Admin))
+                {
+                    <div class="ui message">
+
+                        <label asp-for="Input.IsAdmin"></label>
+                        <input asp-for="Input.IsAdmin" class="form-control" />
+
+                    </div>
+                }
                 <button type="submit" class="btn btn-default ui fluid large red submit button">Créer un compte</button>
 
             </div>
@@ -108,6 +124,22 @@
             
         </div>
 </div>
+<script>
+    
+    function showAgencyName(isAgency) {
+        
+        if (isAgency == 'true') {
+            document.querySelector('#agenceName').style.display = 'block';
+
+        } else {
+            document.querySelector('#agenceName').style.display = 'none';  
+        }
+    }
+
+    
+
+
+</script>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
